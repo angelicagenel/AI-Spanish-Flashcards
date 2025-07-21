@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish AR Verbs Conjugation Cards</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Montserrat', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #7ba1a5 0%, #ffe8e3 100%);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 400px;
+            min-height: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 25px 70px 25px;
+        }
+
+        /* Responsive sizing */
+        @media (min-width: 600px) {
+            body {
+                padding: 40px;
+                gap: 30px;
+            }
+            .card {
+                width: 45%;
+                min-width: 350px;
+                max-width: 450px;
+                min-height: 700px;
+                padding: 60px 35px 80px 35px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .card {
+                width: 30%;
+                min-width: 380px;
+                max-width: 500px;
+                min-height: 800px;
+                padding: 70px 45px 90px 45px;
+            }
+        }
+
+        /* Header gradient background */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            z-index: 1;
+        }
+
+        @media (min-width: 600px) {
+            .card::before {
+                height: 140px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .card::before {
+                height: 160px;
+            }
+        }
+
+        /* Card color themes */
+        .verb-card::before { background: linear-gradient(135deg, #6b8d94 0%, #7ba1a5 100%); }
+        .verb-card:nth-child(even)::before { background: linear-gradient(135deg, #ef7c8e 0%, #e89a8a 100%); }
+
+        /* CRITICAL: Perfect Emoji Positioning */
+        .emoji {
+            position: absolute !important;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3.5rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        @media (min-width: 600px) {
+            .emoji {
+                top: 45px;
+                font-size: 4.5rem;
+                height: 70px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .emoji {
+                top: 50px;
+                font-size: 5.5rem;
+                height: 80px;
+            }
+        }
+
+        .main-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #373f45;
+            margin: 40px 0 15px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            z-index: 2;
+            position: relative;
+            line-height: 1.1;
+            word-wrap: break-word;
+        }
+
+        @media (min-width: 600px) {
+            .main-text {
+                font-size: 2.2rem;
+                margin: 50px 0 20px 0;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .main-text {
+                font-size: 2.6rem;
+                margin: 60px 0 25px 0;
+            }
+        }
+
+        .english-text {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            font-weight: 500;
+            z-index: 2;
+            position: relative;
+            margin-top: 10px;
+            line-height: 1.3;
+            padding: 0 10px;
+        }
+
+        @media (min-width: 600px) {
+            .english-text {
+                font-size: 1.1rem;
+                margin-top: 15px;
+                padding: 0 15px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .english-text {
+                font-size: 1.25rem;
+                margin-top: 20px;
+                padding: 0 20px;
+            }
+        }
+
+        .category-label {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.9);
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: #373f45;
+            font-weight: 600;
+            z-index: 2;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .category-label .english {
+            color: #999;
+            font-weight: 500;
+        }
+
+        @media (min-width: 600px) {
+            .category-label {
+                bottom: 25px;
+                padding: 8px 18px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .category-label {
+                bottom: 30px;
+                padding: 10px 22px;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Audio Button */
+        .audio-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 3;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .audio-button:hover {
+            background: rgba(255,255,255,1);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .audio-button:active {
+            transform: scale(0.95);
+        }
+
+        .audio-button.playing {
+            background: #ef7c8e;
+            color: white;
+        }
+
+        @media (min-width: 600px) {
+            .audio-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+                top: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .audio-button {
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+                top: 25px;
+                right: 25px;
+            }
+        }
+
+        .conjugation-grid {
+            display: grid;
+            gap: 8px;
+            width: 100%;
+            z-index: 2;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .conjugation-item {
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            padding: 10px;
+            border-left: 3px solid #7ba1a5;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .pronoun {
+            font-weight: bold;
+            color: #6b8d94;
+            font-size: 0.85rem;
+        }
+
+        .conjugated {
+            color: #373f45;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .ending {
+            color: #ef7c8e;
+            font-weight: bold;
+        }
+
+        @media (min-width: 600px) {
+            .conjugation-item {
+                font-size: 1rem;
+                padding: 12px;
+            }
+            .pronoun {
+                font-size: 0.95rem;
+            }
+            .conjugated {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .conjugation-item {
+                font-size: 1.1rem;
+                padding: 14px;
+            }
+            .pronoun {
+                font-size: 1.05rem;
+            }
+            .conjugated {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ESTUDIAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Estudiar: yo estudio, tú estudias, usted estudia, él estudia, ella estudia, nosotros estudiamos, nosotras estudiamos, ellos estudian, ellas estudian')">🔊</button>
+        <div class="emoji">📖</div>
+        <div class="main-text">ESTUDIAR</div>
+        <div class="english-text">to study</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">estudi<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">estudi<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">estudi<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">estudi<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">estudi<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- HABLAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Hablar: yo hablo, tú hablas, usted habla, él habla, ella habla, nosotros hablamos, nosotras hablamos, ellos hablan, ellas hablan')">🔊</button>
+        <div class="emoji">💬</div>
+        <div class="main-text">HABLAR</div>
+        <div class="english-text">to talk</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">habl<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">habl<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">habl<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">habl<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">habl<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- CAMBIAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Cambiar: yo cambio, tú cambias, usted cambia, él cambia, ella cambia, nosotros cambiamos, nosotras cambiamos, ellos cambian, ellas cambian')">🔊</button>
+        <div class="emoji">🔄</div>
+        <div class="main-text">CAMBIAR</div>
+        <div class="english-text">to change</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">cambi<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">cambi<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">cambi<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">cambi<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">cambi<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- ESCUCHAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Escuchar: yo escucho, tú escuchas, usted escucha, él escucha, ella escucha, nosotros escuchamos, nosotras escuchamos, ellos escuchan, ellas escuchan')">🔊</button>
+        <div class="emoji">👂🏽</div>
+        <div class="main-text">ESCUCHAR</div>
+        <div class="english-text">to listen</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">escuch<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">escuch<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">escuch<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">escuch<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">escuch<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- ENSEÑAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Enseñar: yo enseño, tú enseñas, usted enseña, él enseña, ella enseña, nosotros enseñamos, nosotras enseñamos, ellos enseñan, ellas enseñan')">🔊</button>
+        <div class="emoji">👩🏽‍🏫</div>
+        <div class="main-text">ENSEÑAR</div>
+        <div class="english-text">to teach</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">enseñ<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">enseñ<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">enseñ<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">enseñ<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">enseñ<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- TRABAJAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Trabajar: yo trabajo, tú trabajas, usted trabaja, él trabaja, ella trabaja, nosotros trabajamos, nosotras trabajamos, ellos trabajan, ellas trabajan')">🔊</button>
+        <div class="emoji">💼</div>
+        <div class="main-text">TRABAJAR</div>
+        <div class="english-text">to work</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">trabaj<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">trabaj<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">trabaj<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">trabaj<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">trabaj<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- CAMINAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Caminar: yo camino, tú caminas, usted camina, él camina, ella camina, nosotros caminamos, nosotras caminamos, ellos caminan, ellas caminan')">🔊</button>
+        <div class="emoji">🚶🏽‍♀️</div>
+        <div class="main-text">CAMINAR</div>
+        <div class="english-text">to walk</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">camin<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">camin<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">camin<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">camin<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">camin<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- REZAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Rezar: yo rezo, tú rezas, usted reza, él reza, ella reza, nosotros rezamos, nosotras rezamos, ellos rezan, ellas rezan')">🔊</button>
+        <div class="emoji">🙏🏽</div>
+        <div class="main-text">REZAR</div>
+        <div class="english-text">to pray</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">rez<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">rez<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">rez<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">rez<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">rez<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- CELEBRAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Celebrar: yo celebro, tú celebras, usted celebra, él celebra, ella celebra, nosotros celebramos, nosotras celebramos, ellos celebran, ellas celebran')">🔊</button>
+        <div class="emoji">🎉</div>
+        <div class="main-text">CELEBRAR</div>
+        <div class="english-text">to celebrate</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">celebr<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">celebr<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">celebr<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">celebr<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">celebr<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- COCINAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Cocinar: yo cocino, tú cocinas, usted cocina, él cocina, ella cocina, nosotros cocinamos, nosotras cocinamos, ellos cocinan, ellas cocinan')">🔊</button>
+        <div class="emoji">👨🏽‍🍳</div>
+        <div class="main-text">COCINAR</div>
+        <div class="english-text">to cook</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">cocin<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">cocin<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">cocin<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">cocin<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">cocin<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- PREPARAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Preparar: yo preparo, tú preparas, usted prepara, él prepara, ella prepara, nosotros preparamos, nosotras preparamos, ellos preparan, ellas preparan')">🔊</button>
+        <div class="emoji">📝</div>
+        <div class="main-text">PREPARAR</div>
+        <div class="english-text">to prepare</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">prepar<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">prepar<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">prepar<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">prepar<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">prepar<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- CENAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Cenar: yo ceno, tú cenas, usted cena, él cena, ella cena, nosotros cenamos, nosotras cenamos, ellos cenan, ellas cenan')">🔊</button>
+        <div class="emoji">🍽️</div>
+        <div class="main-text">CENAR</div>
+        <div class="english-text">to have dinner</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">cen<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">cen<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">cen<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">cen<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">cen<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- DESAYUNAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Desayunar: yo desayuno, tú desayunas, usted desayuna, él desayuna, ella desayuna, nosotros desayunamos, nosotras desayunamos, ellos desayunan, ellas desayunan')">🔊</button>
+        <div class="emoji">🥐</div>
+        <div class="main-text">DESAYUNAR</div>
+        <div class="english-text">to have breakfast</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">desayun<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">desayun<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">desayun<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">desayun<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">desayun<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- GUARDAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Guardar: yo guardo, tú guardas, usted guarda, él guarda, ella guarda, nosotros guardamos, nosotras guardamos, ellos guardan, ellas guardan')">🔊</button>
+        <div class="emoji">📦</div>
+        <div class="main-text">GUARDAR</div>
+        <div class="english-text">to keep</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">guard<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">guard<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">guard<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">guard<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">guard<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- REGRESAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Regresar: yo regreso, tú regresas, usted regresa, él regresa, ella regresa, nosotros regresamos, nosotras regresamos, ellos regresan, ellas regresan')">🔊</button>
+        <div class="emoji">↩️</div>
+        <div class="main-text">REGRESAR</div>
+        <div class="english-text">to return</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">regres<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">regres<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">regres<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">regres<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">regres<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- APAGAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Apagar: yo apago, tú apagas, usted apaga, él apaga, ella apaga, nosotros apagamos, nosotras apagamos, ellos apagan, ellas apagan')">🔊</button>
+        <div class="emoji">🔌</div>
+        <div class="main-text">APAGAR</div>
+        <div class="english-text">to turn off</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">apag<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">apag<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">apag<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">apag<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">apag<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- AYUDAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Ayudar: yo ayudo, tú ayudas, usted ayuda, él ayuda, ella ayuda, nosotros ayudamos, nosotras ayudamos, ellos ayudan, ellas ayudan')">🔊</button>
+        <div class="emoji">🤝🏽</div>
+        <div class="main-text">AYUDAR</div>
+        <div class="english-text">to help</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">ayud<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">ayud<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">ayud<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">ayud<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">ayud<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- BAILAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Bailar: yo bailo, tú bailas, usted baila, él baila, ella baila, nosotros bailamos, nosotras bailamos, ellos bailan, ellas bailan')">🔊</button>
+        <div class="emoji">💃🏽</div>
+        <div class="main-text">BAILAR</div>
+        <div class="english-text">to dance</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">bail<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">bail<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">bail<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">bail<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">bail<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- BUSCAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Buscar: yo busco, tú buscas, usted busca, él busca, ella busca, nosotros buscamos, nosotras buscamos, ellos buscan, ellas buscan')">🔊</button>
+        <div class="emoji">🔍</div>
+        <div class="main-text">BUSCAR</div>
+        <div class="english-text">to look for</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">busc<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">busc<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">busc<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">busc<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">busc<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- CANTAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Cantar: yo canto, tú cantas, usted canta, él canta, ella canta, nosotros cantamos, nosotras cantamos, ellos cantan, ellas cantan')">🔊</button>
+        <div class="emoji">🎤</div>
+        <div class="main-text">CANTAR</div>
+        <div class="english-text">to sing</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">cant<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">cant<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">cant<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">cant<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">cant<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- COMPRAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Comprar: yo compro, tú compras, usted compra, él compra, ella compra, nosotros compramos, nosotras compramos, ellos compran, ellas compran')">🔊</button>
+        <div class="emoji">🛒</div>
+        <div class="main-text">COMPRAR</div>
+        <div class="english-text">to buy</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">compr<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">compr<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">compr<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">compr<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">compr<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- DESCANSAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Descansar: yo descanso, tú descansas, usted descansa, él descansa, ella descansa, nosotros descansamos, nosotras descansamos, ellos descansan, ellas descansan')">🔊</button>
+        <div class="emoji">😴</div>
+        <div class="main-text">DESCANSAR</div>
+        <div class="english-text">to rest</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">descans<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">descans<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">descans<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">descans<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">descans<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- DESEAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Desear: yo deseo, tú deseas, usted desea, él desea, ella desea, nosotros deseamos, nosotras deseamos, ellos desean, ellas desean')">🔊</button>
+        <div class="emoji">🌟</div>
+        <div class="main-text">DESEAR</div>
+        <div class="english-text">to wish</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">dese<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">dese<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">dese<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">dese<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">dese<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- ESQUIAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Esquiar: yo esquío, tú esquías, usted esquía, él esquía, ella esquía, nosotros esquiamos, nosotras esquiamos, ellos esquían, ellas esquían')">🔊</button>
+        <div class="emoji">⛷️</div>
+        <div class="main-text">ESQUIAR</div>
+        <div class="english-text">to ski</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">esquí<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">esquí<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">esquí<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">esqui<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">esquí<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- GANAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Ganar: yo gano, tú ganas, usted gana, él gana, ella gana, nosotros ganamos, nosotras ganamos, ellos ganan, ellas ganan')">🔊</button>
+        <div class="emoji">🏆</div>
+        <div class="main-text">GANAR</div>
+        <div class="english-text">to win</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">gan<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">gan<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">gan<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">gan<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">gan<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- LLAMAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Llamar: yo llamo, tú llamas, usted llama, él llama, ella llama, nosotros llamamos, nosotras llamamos, ellos llaman, ellas llaman')">🔊</button>
+        <div class="emoji">📱</div>
+        <div class="main-text">LLAMAR</div>
+        <div class="english-text">to call</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">llam<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">llam<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">llam<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">llam<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">llam<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- LLEGAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Llegar: yo llego, tú llegas, usted llega, él llega, ella llega, nosotros llegamos, nosotras llegamos, ellos llegan, ellas llegan')">🔊</button>
+        <div class="emoji">🏁</div>
+        <div class="main-text">LLEGAR</div>
+        <div class="english-text">to arrive</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">lleg<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">lleg<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">lleg<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">lleg<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">lleg<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- MANDAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Mandar: yo mando, tú mandas, usted manda, él manda, ella manda, nosotros mandamos, nosotras mandamos, ellos mandan, ellas mandan')">🔊</button>
+        <div class="emoji">📧</div>
+        <div class="main-text">MANDAR</div>
+        <div class="english-text">to send</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">mand<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">mand<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">mand<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">mand<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">mand<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- MIRAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Mirar: yo miro, tú miras, usted mira, él mira, ella mira, nosotros miramos, nosotras miramos, ellos miran, ellas miran')">🔊</button>
+        <div class="emoji">👀</div>
+        <div class="main-text">MIRAR</div>
+        <div class="english-text">to look at</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">mir<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">mir<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">mir<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">mir<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">mir<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- NADAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Nadar: yo nado, tú nadas, usted nada, él nada, ella nada, nosotros nadamos, nosotras nadamos, ellos nadan, ellas nadan')">🔊</button>
+        <div class="emoji">🏊🏽‍♀️</div>
+        <div class="main-text">NADAR</div>
+        <div class="english-text">to swim</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">nad<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">nad<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">nad<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">nad<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">nad<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- NECESITAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Necesitar: yo necesito, tú necesitas, usted necesita, él necesita, ella necesita, nosotros necesitamos, nosotras necesitamos, ellos necesitan, ellas necesitan')">🔊</button>
+        <div class="emoji">📌</div>
+        <div class="main-text">NECESITAR</div>
+        <div class="english-text">to need</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">necesit<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">necesit<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">necesit<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">necesit<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">necesit<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- PRACTICAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Practicar: yo practico, tú practicas, usted practica, él practica, ella practica, nosotros practicamos, nosotras practicamos, ellos practican, ellas practican')">🔊</button>
+        <div class="emoji">🏃🏽‍♀️</div>
+        <div class="main-text">PRACTICAR</div>
+        <div class="english-text">to practice</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">practic<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">practic<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">practic<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">practic<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">practic<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- PREGUNTAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Preguntar: yo pregunto, tú preguntas, usted pregunta, él pregunta, ella pregunta, nosotros preguntamos, nosotras preguntamos, ellos preguntan, ellas preguntan')">🔊</button>
+        <div class="emoji">❓</div>
+        <div class="main-text">PREGUNTAR</div>
+        <div class="english-text">to ask</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">pregunt<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">pregunt<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">pregunt<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">pregunt<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">pregunt<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- TOMAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Tomar: yo tomo, tú tomas, usted toma, él toma, ella toma, nosotros tomamos, nosotras tomamos, ellos toman, ellas toman')">🔊</button>
+        <div class="emoji">☕</div>
+        <div class="main-text">TOMAR</div>
+        <div class="english-text">to take</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">tom<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">tom<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">tom<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">tom<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">tom<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- USAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Usar: yo uso, tú usas, usted usa, él usa, ella usa, nosotros usamos, nosotras usamos, ellos usan, ellas usan')">🔊</button>
+        <div class="emoji">🔧</div>
+        <div class="main-text">USAR</div>
+        <div class="english-text">to use</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">us<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">us<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">us<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">us<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">us<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <!-- VIAJAR -->
+    <div class="card verb-card">
+        <button class="audio-button" onclick="speakText('Viajar: yo viajo, tú viajas, usted viaja, él viaja, ella viaja, nosotros viajamos, nosotras viajamos, ellos viajan, ellas viajan')">🔊</button>
+        <div class="emoji">✈️</div>
+        <div class="main-text">VIAJAR</div>
+        <div class="english-text">to travel</div>
+        <div class="conjugation-grid">
+            <div class="conjugation-item">
+                <span class="pronoun">yo</span> <span class="conjugated">viaj<span class="ending">o</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">tú</span> <span class="conjugated">viaj<span class="ending">as</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">usted/él/ella</span> <span class="conjugated">viaj<span class="ending">a</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">nosotr@s</span> <span class="conjugated">viaj<span class="ending">amos</span></span>
+            </div>
+            <div class="conjugation-item">
+                <span class="pronoun">ell@s</span> <span class="conjugated">viaj<span class="ending">an</span></span>
+            </div>
+        </div>
+        <div class="category-label">Conjugación | <span class="english">Conjugation</span></div>
+    </div>
+
+    <script>
+        // Text-to-Speech functionality
+        function speakText(text) {
+            // Check if speech synthesis is supported
+            if (!('speechSynthesis' in window)) {
+                alert('Tu navegador no soporta síntesis de voz. Prueba con Chrome, Firefox o Safari.');
+                return;
+            }
+
+            // Cancel any ongoing speech
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+                // Wait a bit for the cancellation to complete
+                setTimeout(() => startSpeaking(text), 100);
+            } else {
+                startSpeaking(text);
+            }
+        }
+
+        function startSpeaking(text) {
+            // Create new speech synthesis utterance
+            const utterance = new SpeechSynthesisUtterance(text);
+            
+            // Set language to Mexican Spanish
+            utterance.lang = 'es-MX';
+            
+            // Try to find Mexican/Latin American Spanish voices
+            const voices = speechSynthesis.getVoices();
+            const mexicanVoice = voices.find(voice => 
+                voice.lang.includes('es-MX') || 
+                voice.lang.includes('es-US') ||
+                voice.lang.includes('es-AR') ||
+                voice.lang.includes('es-CO') ||
+                voice.lang.includes('es') && !voice.lang.includes('es-ES')
+            );
+            if (mexicanVoice) {
+                utterance.voice = mexicanVoice;
+                console.log('Using voice:', mexicanVoice.name, mexicanVoice.lang);
+            }
+            
+            // Set speech rate and pitch for better learning
+            utterance.rate = 0.8;  // Slightly slower for language learning
+            utterance.pitch = 1;
+            utterance.volume = 1;
+
+            // Find button that was clicked and add visual feedback
+            const button = event.currentTarget || event.target;
+            button.classList.add('playing');
+            button.innerHTML = '⏸️';
+
+            // Reset button when speech ends
+            utterance.onend = function() {
+                button.classList.remove('playing');
+                button.innerHTML = '🔊';
+            };
+
+            utterance.onerror = function(e) {
+                console.log('Speech error:', e);
+                button.classList.remove('playing');
+                button.innerHTML = '🔊';
+                alert('Error al reproducir audio. Verifica que tu navegador permita audio.');
+            };
+
+            // Speak the text
+            try {
+                speechSynthesis.speak(utterance);
+            } catch (error) {
+                console.log('Speech synthesis error:', error);
+                button.classList.remove('playing');
+                button.innerHTML = '🔊';
+                alert('Error al iniciar la síntesis de voz.');
+            }
+        }
+
+        // Load voices when they become available
+        speechSynthesis.onvoiceschanged = function() {
+            console.log('Voices loaded:', speechSynthesis.getVoices().length);
+        };
+
+        // Stop speech if user navigates away
+        window.addEventListener('beforeunload', function() {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+        });
+
+        // Test function for debugging
+        function testAudio() {
+            console.log('Speech synthesis supported:', 'speechSynthesis' in window);
+            console.log('Available voices:', speechSynthesis.getVoices().length);
+            speakText('Hola');
+        }
+    </script>
+</body>
+</html>
