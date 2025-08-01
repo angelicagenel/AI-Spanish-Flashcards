@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish Time Expression Cards</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Montserrat', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #7ba1a5 0%, #ffe8e3 100%);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .time-card {
+            width: 100%;
+            max-width: 400px;
+            min-height: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 25px 70px 25px;
+        }
+
+        /* Responsive sizing */
+        @media (min-width: 600px) {
+            body {
+                padding: 40px;
+                gap: 30px;
+            }
+            .time-card {
+                width: 45%;
+                min-width: 350px;
+                max-width: 450px;
+                min-height: 700px;
+                padding: 60px 35px 80px 35px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .time-card {
+                width: 30%;
+                min-width: 380px;
+                max-width: 500px;
+                min-height: 800px;
+                padding: 70px 45px 90px 45px;
+            }
+        }
+
+        /* Header gradient background */
+        .time-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            z-index: 1;
+        }
+
+        @media (min-width: 600px) {
+            .time-card::before {
+                height: 140px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .time-card::before {
+                height: 160px;
+            }
+        }
+
+        /* Card color themes */
+        .intro-card::before { background: linear-gradient(135deg, #ef7c8e 0%, #db6565 100%); }
+        .structure-card::before { background: linear-gradient(135deg, #7ba1a5 0%, #6b8d94 100%); }
+        .phrase-card::before { background: linear-gradient(135deg, #e89a8a 0%, #db6565 100%); }
+        .numbers-card::before { background: linear-gradient(135deg, #ef7c8e 0%, #e89a8a 100%); }
+        .examples-card::before { background: linear-gradient(135deg, #6b8d94 0%, #7ba1a5 100%); }
+
+        /* CRITICAL: Perfect Emoji Positioning */
+        .emoji {
+            position: absolute !important;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3.5rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        @media (min-width: 600px) {
+            .emoji {
+                top: 105px;
+                font-size: 4.5rem;
+                height: 70px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .emoji {
+                top: 120px;
+                font-size: 5.5rem;
+                height: 80px;
+            }
+        }
+
+        .main-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #373f45;
+            margin: 40px 0 15px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            z-index: 2;
+            position: relative;
+            line-height: 1.1;
+            word-wrap: break-word;
+        }
+
+        @media (min-width: 600px) {
+            .main-text {
+                font-size: 2.2rem;
+                margin: 50px 0 20px 0;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .main-text {
+                font-size: 2.6rem;
+                margin: 60px 0 25px 0;
+            }
+        }
+
+        .english-text {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            font-weight: 500;
+            z-index: 2;
+            position: relative;
+            margin-top: 10px;
+            line-height: 1.3;
+            padding: 0 10px;
+        }
+
+        @media (min-width: 600px) {
+            .english-text {
+                font-size: 1.1rem;
+                margin-top: 15px;
+                padding: 0 15px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .english-text {
+                font-size: 1.25rem;
+                margin-top: 20px;
+                padding: 0 20px;
+            }
+        }
+
+        .examples-container {
+            z-index: 2;
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 600px) {
+            .examples-container {
+                margin-top: 25px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .examples-container {
+                margin-top: 30px;
+            }
+        }
+
+        .example-item {
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 8px 0;
+            border-left: 4px solid #ef7c8e;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #373f45;
+        }
+
+        @media (min-width: 600px) {
+            .example-item {
+                font-size: 1.05rem;
+                padding: 15px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .example-item {
+                font-size: 1.15rem;
+                padding: 18px;
+            }
+        }
+
+        .numbers-grid {
+            z-index: 2;
+            position: relative;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .number-item {
+            background: rgba(255,255,255,0.9);
+            border-radius: 8px;
+            padding: 10px 5px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #373f45;
+            border-left: 3px solid #ef7c8e;
+        }
+
+        @media (min-width: 600px) {
+            .number-item {
+                font-size: 1rem;
+                padding: 12px 8px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .number-item {
+                font-size: 1.1rem;
+                padding: 15px 10px;
+            }
+        }
+
+        .structure-comparison {
+            z-index: 2;
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .comparison-item {
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #7ba1a5;
+            text-align: center;
+        }
+
+        .comparison-time {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #373f45;
+            margin-bottom: 5px;
+        }
+
+        .comparison-spanish {
+            font-size: 1rem;
+            color: #7ba1a5;
+            font-weight: 600;
+        }
+
+        @media (min-width: 600px) {
+            .comparison-time {
+                font-size: 1.4rem;
+            }
+            .comparison-spanish {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .comparison-time {
+                font-size: 1.6rem;
+            }
+            .comparison-spanish {
+                font-size: 1.2rem;
+            }
+        }
+
+        .category-label {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.9);
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: #373f45;
+            font-weight: 600;
+            z-index: 2;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .category-label .english {
+            color: #999;
+            font-weight: 500;
+        }
+
+        @media (min-width: 600px) {
+            .category-label {
+                bottom: 25px;
+                padding: 8px 18px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .category-label {
+                bottom: 30px;
+                padding: 10px 22px;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Audio Button */
+        .audio-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 3;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .audio-button:hover {
+            background: rgba(255,255,255,1);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .audio-button:active {
+            transform: scale(0.95);
+        }
+
+        .audio-button.playing {
+            background: #ef7c8e;
+            color: white;
+        }
+
+        @media (min-width: 600px) {
+            .audio-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+                top: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .audio-button {
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+                top: 25px;
+                right: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Introduction Card -->
+    <div class="time-card intro-card">
+        <button class="audio-button" onclick="speakText('¿Qué hora es?')">🔊</button>
+        <div class="emoji">⏰</div>
+        <div class="main-text">¿QUÉ HORA ES?</div>
+        <div class="english-text">What time is it? The most important question for telling time in Spanish.</div>
+        <div class="category-label">Pregunta básica | <span class="english">Basic question</span></div>
+    </div>
+
+    <!-- Structure Card -->
+    <div class="time-card structure-card">
+        <button class="audio-button" onclick="speakText('Es la una. Son las dos.')">🔊</button>
+        <div class="emoji">🕐</div>
+        <div class="main-text">ESTRUCTURA</div>
+        <div class="structure-comparison">
+            <div class="comparison-item">
+                <div class="comparison-time">1:00</div>
+                <div class="comparison-spanish">Es la una</div>
+            </div>
+            <div class="comparison-item">
+                <div class="comparison-time">2:00 - 12:00</div>
+                <div class="comparison-spanish">Son las dos/tres/cuatro...</div>
+            </div>
+        </div>
+        <div class="category-label">Estructura | <span class="english">Structure</span></div>
+    </div>
+
+    <!-- Y CUARTO Card -->
+    <div class="time-card phrase-card">
+        <button class="audio-button" onclick="speakText('Son las dos y cuarto. Es la una y cuarto.')">🔊</button>
+        <div class="emoji">🕐</div>
+        <div class="main-text">Y CUARTO</div>
+        <div class="english-text">Quarter past - Add 15 minutes to the hour</div>
+        <div class="examples-container">
+            <div class="example-item">Son las dos y cuarto = 2:15</div>
+            <div class="example-item">Es la una y cuarto = 1:15</div>
+        </div>
+        <div class="category-label">Minutos | <span class="english">Minutes</span></div>
+    </div>
+
+    <!-- Y MEDIA Card -->
+    <div class="time-card phrase-card">
+        <button class="audio-button" onclick="speakText('Son las tres y media. Es la una y media.')">🔊</button>
+        <div class="emoji">🕐</div>
+        <div class="main-text">Y MEDIA</div>
+        <div class="english-text">Half past - Add 30 minutes to the hour</div>
+        <div class="examples-container">
+            <div class="example-item">Son las tres y media = 3:30</div>
+            <div class="example-item">Es la una y media = 1:30</div>
+        </div>
+        <div class="category-label">Minutos | <span class="english">Minutes</span></div>
+    </div>
+
+    <!-- PARA LAS Card -->
+    <div class="time-card phrase-card">
+        <button class="audio-button" onclick="speakText('Veinte para las tres. Cuarto para la una.')">🔊</button>
+        <div class="emoji">🕐</div>
+        <div class="main-text">PARA LAS</div>
+        <div class="english-text">To the hour - Minutes before the next hour</div>
+        <div class="examples-container">
+            <div class="example-item">20 para las tres = 2:40</div>
+            <div class="example-item">Cuarto para la una = 12:45</div>
+        </div>
+        <div class="category-label">Minutos | <span class="english">Minutes</span></div>
+    </div>
+
+    <!-- EN PUNTO Card -->
+    <div class="time-card phrase-card">
+        <button class="audio-button" onclick="speakText('Son las cinco en punto. Es la una en punto.')">🔊</button>
+        <div class="emoji">🎯</div>
+        <div class="main-text">EN PUNTO</div>
+        <div class="english-text">O'clock - Exactly on the hour</div>
+        <div class="examples-container">
+            <div class="example-item">Son las cinco en punto = 5:00</div>
+            <div class="example-item">Es la una en punto = 1:00</div>
+        </div>
+        <div class="category-label">Exacto | <span class="english">Exact</span></div>
+    </div>
+
+    <!-- Numbers Card -->
+    <div class="time-card numbers-card">
+        <button class="audio-button" onclick="speakText('Una, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez, once, doce')">🔊</button>
+        <div class="emoji">🔢</div>
+        <div class="main-text">NÚMEROS</div>
+        <div class="numbers-grid">
+            <div class="number-item">una (1)</div>
+            <div class="number-item">dos (2)</div>
+            <div class="number-item">tres (3)</div>
+            <div class="number-item">cuatro (4)</div>
+            <div class="number-item">cinco (5)</div>
+            <div class="number-item">seis (6)</div>
+            <div class="number-item">siete (7)</div>
+            <div class="number-item">ocho (8)</div>
+            <div class="number-item">nueve (9)</div>
+            <div class="number-item">diez (10)</div>
+            <div class="number-item">once (11)</div>
+            <div class="number-item">doce (12)</div>
+        </div>
+        <div class="category-label">Números | <span class="english">Numbers</span></div>
+    </div>
+
+    <!-- EXPRESIONES Card A - Basic -->
+    <div class="time-card examples-card">
+        <button class="audio-button" onclick="speakText('¿A qué hora? A las dos.')">🔊</button>
+        <div class="emoji">💡</div>
+        <div class="main-text">EXPRESIONES</div>
+        <div class="english-text">Basic time questions and responses</div>
+        <div class="examples-container">
+            <div class="example-item">¿A qué hora...? = At what time...?</div>
+            <div class="example-item">A las dos = At 2:00</div>
+        </div>
+        <div class="category-label">Pregunta básica | <span class="english">Basic question</span></div>
+    </div>
+
+    <!-- EXPRESIONES Card B - Fiesta Example -->
+    <div class="time-card examples-card">
+        <button class="audio-button" onclick="speakText('¿A qué hora es la fiesta? La fiesta es a las dos de la tarde.')">🔊</button>
+        <div class="emoji">🎉</div>
+        <div class="main-text">EXPRESIONES</div>
+        <div class="english-text">Party time example with parts of day</div>
+        <div class="examples-container">
+            <div class="example-item">¿A qué hora es la fiesta? = At what time is the party?</div>
+            <div class="example-item">La fiesta es a las dos de la tarde</div>
+        </div>
+        <div class="category-label">Ejemplo completo | <span class="english">Complete example</span></div>
+    </div>
+
+    <!-- Partes del día Card -->
+    <div class="time-card phrase-card">
+        <button class="audio-button" onclick="speakText('De la mañana. De la tarde.')">🔊</button>
+        <div class="emoji">🌄</div>
+        <div class="main-text">PARTES DEL DÍA</div>
+        <div class="english-text">Parts of the day for time expressions</div>
+        <div class="examples-container">
+            <div class="example-item">De la mañana = in the morning</div>
+            <div class="example-item">De la tarde = in the afternoon</div>
+        </div>
+        <div class="category-label">Partes del día | <span class="english">Parts of day</span></div>
+    </div>
+
+    <!-- De la noche Card -->
+    <div class="time-card phrase-card">
+        <button class="audio-button" onclick="speakText('De la noche. A la una.')">🔊</button>
+        <div class="emoji">🌃</div>
+        <div class="main-text">DE LA NOCHE</div>
+        <div class="english-text">Night time and singular hour expression</div>
+        <div class="examples-container">
+            <div class="example-item">De la noche = at night</div>
+            <div class="example-item">A la una = at 1:00</div>
+        </div>
+        <div class="category-label">Noche | <span class="english">Night</span></div>
+    </div>
+
+    <!-- Momentos del día Card -->
+    <div class="time-card phrase-card">
+        <button class="audio-button" onclick="speakText('La madrugada. El amanecer.')">🔊</button>
+        <div class="emoji">☀️</div>
+        <div class="main-text">MOMENTOS DEL DÍA</div>
+        <div class="english-text">Times of day - Different moments throughout the day</div>
+        <div class="examples-container">
+            <div class="example-item">La madrugada = early morning</div>
+            <div class="example-item">El amanecer = dawn/sunrise</div>
+        </div>
+        <div class="category-label">Momentos | <span class="english">Times of day</span></div>
+    </div>
+
+    <!-- El mediodía Card -->
+    <div class="time-card phrase-card">
+        <button class="audio-button" onclick="speakText('El mediodía. La tarde.')">🔊</button>
+        <div class="emoji">🌅</div>
+        <div class="main-text">MEDIODÍA</div>
+        <div class="english-text">Noon and afternoon periods</div>
+        <div class="examples-container">
+            <div class="example-item">El mediodía = noon</div>
+            <div class="example-item">La tarde = afternoon</div>
+        </div>
+        <div class="category-label">Día | <span class="english">Day time</span></div>
+    </div>
+
+    <!-- La noche Card -->
+    <div class="time-card phrase-card">
+        <button class="audio-button" onclick="speakText('El anochecer. La medianoche.')">🔊</button>
+        <div class="emoji">🌙</div>
+        <div class="main-text">LA NOCHE</div>
+        <div class="english-text">Evening and night periods</div>
+        <div class="examples-container">
+            <div class="example-item">El anochecer = dusk/sunset</div>
+            <div class="example-item">La medianoche = midnight</div>
+        </div>
+        <div class="category-label">Noche | <span class="english">Night time</span></div>
+    </div>
+
+    <!-- Expresiones comunes Card -->
+    <div class="time-card examples-card">
+        <button class="audio-button" onclick="speakText('Temprano. Tarde.')">🔊</button>
+        <div class="emoji">⏰</div>
+        <div class="main-text">EXPRESIONES COMUNES</div>
+        <div class="english-text">Common time expressions for daily use</div>
+        <div class="examples-container">
+            <div class="example-item">Temprano = early</div>
+            <div class="example-item">Tarde = late</div>
+        </div>
+        <div class="category-label">Expresiones | <span class="english">Common expressions</span></div>
+    </div>
+
+    <!-- A tiempo Card -->
+    <div class="time-card examples-card">
+        <button class="audio-button" onclick="speakText('A tiempo. Justo a tiempo.')">🔊</button>
+        <div class="emoji">⌚</div>
+        <div class="main-text">A TIEMPO</div>
+        <div class="english-text">Punctuality and timing expressions</div>
+        <div class="examples-container">
+            <div class="example-item">A tiempo = on time</div>
+            <div class="example-item">Justo a tiempo = just in time</div>
+        </div>
+        <div class="category-label">Puntualidad | <span class="english">Punctuality</span></div>
+    </div>
+
+    <!-- Ahora mismo Card -->
+    <div class="time-card examples-card">
+        <button class="audio-button" onclick="speakText('Ahora mismo. Más tarde.')">🔊</button>
+        <div class="emoji">⚡</div>
+        <div class="main-text">AHORA MISMO</div>
+        <div class="english-text">Immediate time references</div>
+        <div class="examples-container">
+            <div class="example-item">Ahora mismo = right now</div>
+            <div class="example-item">Más tarde = later</div>
+        </div>
+        <div class="category-label">Inmediato | <span class="english">Immediate</span></div>
+    </div>
+
+    <!-- Frecuencia Card -->
+    <div class="time-card phrase-card">
+        <button class="audio-button" onclick="speakText('A veces. Siempre.')">🔊</button>
+        <div class="emoji">📆</div>
+        <div class="main-text">FRECUENCIA</div>
+        <div class="english-text">Frequency expressions for daily routines</div>
+        <div class="examples-container">
+            <div class="example-item">A veces = sometimes</div>
+            <div class="example-item">Siempre = always</div>
+        </div>
+        <div class="category-label">Frecuencia | <span class="english">Frequency</span></div>
+    </div>
+
+    <!-- Rutina Card -->
+    <div class="time-card phrase-card">
+        <button class="audio-button" onclick="speakText('Casi nunca. Con frecuencia.')">🔊</button>
+        <div class="emoji">🔄</div>
+        <div class="main-text">RUTINA</div>
+        <div class="english-text">Routine and habit expressions</div>
+        <div class="examples-container">
+            <div class="example-item">Casi nunca = almost never</div>
+            <div class="example-item">Con frecuencia = often</div>
+        </div>
+        <div class="category-label">Rutina | <span class="english">Routine</span></div>
+    </div>
+
+    <!-- Nunca/De vez en cuando Card -->
+    <div class="time-card phrase-card">
+        <button class="audio-button" onclick="speakText('Nunca. De vez en cuando.')">🔊</button>
+        <div class="emoji">🔀</div>
+        <div class="main-text">NUNCA</div>
+        <div class="english-text">Never and occasional frequency</div>
+        <div class="examples-container">
+            <div class="example-item">Nunca = never</div>
+            <div class="example-item">De vez en cuando = from time to time</div>
+        </div>
+        <div class="category-label">Frecuencia | <span class="english">Frequency</span></div>
+    </div>
+
+    <script>
+        // Text-to-Speech functionality
+        function speakText(text) {
+            // Check if speech synthesis is supported
+            if (!('speechSynthesis' in window)) {
+                alert('Tu navegador no soporta síntesis de voz. Prueba con Chrome, Firefox o Safari.');
+                return;
+            }
+
+            // Cancel any ongoing speech
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+                // Wait a bit for the cancellation to complete
+                setTimeout(() => startSpeaking(text), 100);
+            } else {
+                startSpeaking(text);
+            }
+        }
+
+        function startSpeaking(text) {
+            // Create new speech synthesis utterance
+            const utterance = new SpeechSynthesisUtterance(text);
+            
+            // Set language to Mexican Spanish
+            utterance.lang = 'es-MX';
+            
+            // Try to find Mexican/Latin American Spanish voices
+            const voices = speechSynthesis.getVoices();
+            const mexicanVoice = voices.find(voice => 
+                voice.lang.includes('es-MX') || 
+                voice.lang.includes('es-US') ||
+                voice.lang.includes('es-AR') ||
+                voice.lang.includes('es-CO') ||
+                voice.lang.includes('es') && !voice.lang.includes('es-ES')
+            );
+            if (mexicanVoice) {
+                utterance.voice = mexicanVoice;
+                console.log('Using voice:', mexicanVoice.name, mexicanVoice.lang);
+            }
+            
+            // Set speech rate and pitch for better learning
+            utterance.rate = 0.8;  // Slightly slower for language learning
+            utterance.pitch = 1;
+            utterance.volume = 1;
+
+            // Find button that was clicked and add visual feedback
+            const button = event.target || event.currentTarget;
+            button.classList.add('playing');
+            button.innerHTML = '⏸️';
+
+            // Reset button when speech ends
+            utterance.onend = function() {
+                button.classList.remove('playing');
+                button.innerHTML = '🔊';
+            };
+
+            utterance.onerror = function(e) {
+                console.log('Speech error:', e);
+                button.classList.remove('playing');
+                button.innerHTML = '🔊';
+                alert('Error al reproducir audio. Verifica que tu navegador permita audio.');
+            };
+
+            // Speak the text
+            try {
+                speechSynthesis.speak(utterance);
+            } catch (error) {
+                console.log('Speech synthesis error:', error);
+                button.classList.remove('playing');
+                button.innerHTML = '🔊';
+                alert('Error al iniciar la síntesis de voz.');
+            }
+        }
+
+        // Load voices when they become available
+        speechSynthesis.onvoiceschanged = function() {
+            console.log('Voices loaded:', speechSynthesis.getVoices().length);
+        };
+
+        // Stop speech if user navigates away
+        window.addEventListener('beforeunload', function() {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+        });
+
+        // Test function for debugging
+        function testAudio() {
+            console.log('Speech synthesis supported:', 'speechSynthesis' in window);
+            console.log('Available voices:', speechSynthesis.getVoices().length);
+            speakText('Hola');
+        }
+    </script>
+</body>
+</html>
