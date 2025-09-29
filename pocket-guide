@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spanish Survival + Introductions Cards</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 20px;
+      font-family: 'Montserrat','Arial',sans-serif;
+      background: linear-gradient(135deg, #7ba1a5 0%, #ffe8e3 100%);
+      display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; min-height: 100vh;
+    }
+    .card {
+      width:100%; max-width:400px; min-height:600px; background:white; border-radius:20px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.1); overflow:hidden; position:relative;
+      display:flex; flex-direction:column; justify-content:center; align-items:center;
+      text-align:center; padding:50px 25px 70px 25px;
+    }
+    @media (min-width:600px){
+      body{padding:40px; gap:30px;}
+      .card{width:45%; min-width:350px; max-width:450px; min-height:700px; padding:60px 35px 80px 35px;}
+    }
+    @media (min-width:900px){
+      .card{width:30%; min-width:380px; max-width:500px; min-height:800px; padding:70px 45px 90px 45px;}
+    }
+    .card::before{content:''; position:absolute; top:0; left:0; right:0; height:120px; z-index:1;}
+    @media (min-width:600px){ .card::before{height:140px;} }
+    @media (min-width:900px){ .card::before{height:160px;} }
+
+    /* Color themes */
+    .intro-card::before{ background:linear-gradient(135deg,#ef7c8e 0%,#db6565 100%); }
+    .presentations-card::before{ background:linear-gradient(135deg,#7ba1a5 0%,#6b8d94 100%); }
+    .greetings-card::before{ background:linear-gradient(135deg,#e89a8a 0%,#db6565 100%); }
+    .community-card::before{ background:linear-gradient(135deg,#ef7c8e 0%,#e89a8a 100%); }
+    .phrase-card::before{ background:linear-gradient(135deg,#6b8d94 0%,#7ba1a5 100%); }
+
+    /* Emoji */
+    .emoji{
+      position:absolute !important; top:90px; left:50%; transform:translateX(-50%);
+      font-size:3.5rem; height:60px; display:flex; align-items:center; justify-content:center; z-index:2;
+    }
+    @media (min-width:600px){ .emoji{ top:105px; font-size:4.5rem; height:70px; } }
+    @media (min-width:900px){ .emoji{ top:120px; font-size:5.5rem; height:80px; } }
+
+    .main-text{
+      font-size:1.8rem; font-weight:bold; color:#373f45; margin:40px 0 15px 0;
+      text-shadow:2px 2px 4px rgba(0,0,0,0.1); z-index:2; position:relative; line-height:1.1; word-wrap:break-word;
+    }
+    @media (min-width:600px){ .main-text{ font-size:2.2rem; margin:50px 0 20px 0; } }
+    @media (min-width:900px){ .main-text{ font-size:2.6rem; margin:60px 0 25px 0; } }
+
+    .english-text{
+      font-size:0.9rem; color:#666; font-style:italic; font-weight:500; z-index:2; position:relative;
+      margin-top:10px; line-height:1.3; padding:0 10px;
+    }
+    @media (min-width:600px){ .english-text{ font-size:1.1rem; margin-top:15px; padding:0 15px; } }
+    @media (min-width:900px){ .english-text{ font-size:1.25rem; margin-top:20px; padding:0 20px; } }
+
+    .examples-container{ z-index:2; position:relative; width:100%; margin-top:20px; }
+    .example-item{
+      background:rgba(255,255,255,0.9); border-radius:10px; padding:12px; margin:8px 0;
+      border-left:4px solid #ef7c8e; font-size:0.95rem; font-weight:600; color:#373f45;
+    }
+    @media (min-width:600px){ .example-item{ font-size:1.05rem; padding:15px; } }
+    @media (min-width:900px){ .example-item{ font-size:1.15rem; padding:18px; } }
+
+    .category-label{
+      position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+      background:rgba(255,255,255,0.9); padding:6px 14px; border-radius:15px; font-size:0.75rem;
+      color:#373f45; font-weight:600; z-index:2; text-align:center; white-space:nowrap;
+    }
+    .category-label .english{ color:#999; font-weight:500; }
+    @media (min-width:600px){ .category-label{ bottom:25px; padding:8px 18px; font-size:0.85rem; } }
+    @media (min-width:900px){ .category-label{ bottom:30px; padding:10px 22px; font-size:0.95rem; } }
+
+    /* Audio Button */
+    .audio-button{
+      position:absolute; top:15px; right:15px; width:45px; height:45px; background:rgba(255,255,255,0.9);
+      border:none; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;
+      z-index:3; font-size:1.2rem; transition:all .3s ease; box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    }
+    .audio-button:hover{ background:#fff; transform:scale(1.1); box-shadow:0 6px 20px rgba(0,0,0,0.2); }
+    .audio-button:active{ transform:scale(0.95); }
+    .audio-button.playing{ background:#ef7c8e; color:white; }
+    @media (min-width:600px){ .audio-button{ width:50px; height:50px; font-size:1.3rem; top:20px; right:20px; } }
+    @media (min-width:900px){ .audio-button{ width:55px; height:55px; font-size:1.4rem; top:25px; right:25px; } }
+
+    .response-box{
+      background:rgba(239,124,142,0.2); border-radius:10px; padding:15px; margin:15px 0;
+      border-left:4px solid #ef7c8e; z-index:2; position:relative;
+    }
+    .response-spanish{ font-size:1.4rem; font-weight:bold; color:#373f45; margin-bottom:5px; }
+    .response-english{ font-size:0.9rem; color:#666; font-style:italic; }
+    @media (min-width:600px){ .response-spanish{ font-size:1.6rem; } .response-english{ font-size:1rem; } }
+    @media (min-width:900px){ .response-spanish{ font-size:1.8rem; } .response-english{ font-size:1.1rem; } }
+  </style>
+</head>
+<body>
+
+  <!-- ====== SECTION A: SUPERVIVENCIA (goes first) ====== -->
+  <div class="card intro-card">
+    <button class="audio-button" onclick="speakText('Frases de supervivencia en México')">🔊</button>
+    <div class="emoji">🧭</div>
+    <div class="main-text">SUPERVIVENCIA</div>
+    <div class="english-text">Essential travel phrases for moving around Mexico with confidence</div>
+    <div class="examples-container">
+      <div class="example-item">¿Dónde está…? + lugares clave</div>
+      <div class="example-item">Taxi/Uber, pago, boletos</div>
+    </div>
+    <div class="category-label">Supervivencia | <span class="english">Survival</span></div>
+  </div>
+
+  <!-- ¿Dónde está…? + list -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('¿Dónde está el baño, por favor?')">🔊</button>
+    <div class="emoji">📍</div>
+    <div class="main-text">¿DÓNDE ESTÁ...?</div>
+    <div class="english-text">Where is...?</div>
+    <div class="examples-container">
+      <div class="example-item">...el baño</div>
+      <div class="example-item">...el hotel</div>
+      <div class="example-item">...la farmacia</div>
+      <div class="example-item">...la estación de autobuses</div>
+      <div class="example-item">...la parada del metro</div>
+      <div class="example-item">...el aeropuerto</div>
+    </div>
+    <div class="category-label">Ubicación | <span class="english">Location</span></div>
+  </div>
+
+  <!-- Taxi / Uber -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Necesito un taxi, por favor')">🔊</button>
+    <div class="emoji">🚕</div>
+    <div class="main-text">NECESITO UN TAXI</div>
+    <div class="english-text">I need a taxi</div>
+    <div class="examples-container">
+      <div class="example-item">Voy al hotel Fiesta Americana</div>
+      <div class="example-item">¿Cuánto cuesta al aeropuerto?</div>
+      <div class="example-item">Pare aquí, por favor</div>
+    </div>
+    <div class="category-label">Transporte | <span class="english">Transport</span></div>
+  </div>
+  <!-- Restaurante -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Una mesa para dos personas')">🔊</button>
+    <div class="emoji">🍽️</div>
+    <div class="main-text">EN EL RESTAURANTE</div>
+    <div class="english-text">At the restaurant</div>
+    <div class="examples-container">
+      <div class="example-item">Una mesa para dos personas</div>
+      <div class="example-item">Quiero este platillo, por favor</div>
+      <div class="example-item">¿Tiene un menú sin carne?</div>
+      <div class="example-item">Soy alérgico a mariscos</div>
+      <div class="example-item">La cuenta, por favor</div>
+      <div class="example-item">¿Aceptan tarjeta?</div>
+      <div class="example-item">Sin picante, por favor</div>
+    </div>
+    <div class="category-label">Comida | <span class="english">Food</span></div>
+  </div>
+
+  <!-- Emergencias -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('¡Ayuda, por favor!')">🔊</button>
+    <div class="emoji">🆘</div>
+    <div class="main-text">EMERGENCIAS</div>
+    <div class="english-text">Emergencies</div>
+    <div class="examples-container">
+      <div class="example-item">¡Ayuda, por favor!</div>
+      <div class="example-item">Necesito un médico</div>
+      <div class="example-item">¿Dónde está el hospital?</div>
+      <div class="example-item">Busco una farmacia</div>
+      <div class="example-item">Llamen a la policía, por favor</div>
+      <div class="example-item">Estoy enfermo, necesito ayuda</div>
+    </div>
+    <div class="category-label">Salud | <span class="english">Health</span></div>
+  </div>
+
+  <!-- Paseos & Excursiones -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('¿Hay una excursión a las pirámides?')">🔊</button>
+    <div class="emoji">🏛️</div>
+    <div class="main-text">EXCURSIONES</div>
+    <div class="english-text">Excursions & tickets</div>
+    <div class="examples-container">
+      <div class="example-item">Quiero ir a la playa</div>
+      <div class="example-item">¿Hay una excursión a las pirámides?</div>
+      <div class="example-item">¿Dónde puedo comprar boletos?</div>
+      <div class="example-item">¿Cuánto cuesta la entrada?</div>
+    </div>
+    <div class="category-label">Viaje | <span class="english">Travel</span></div>
+  </div>
+
+  <!-- Comunicación mínima -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('¿Puede ayudarme, por favor?')">🔊</button>
+    <div class="emoji">🗣️</div>
+    <div class="main-text">COMUNICACIÓN</div>
+    <div class="english-text">Ask for help & share info</div>
+    <div class="examples-container">
+      <div class="example-item">¿Habla inglés?</div>
+      <div class="example-item">¿Puede ayudarme, por favor?</div>
+      <div class="example-item">Necesito la dirección del hotel</div>
+      <div class="example-item">Aquí está mi número de teléfono</div>
+    </div>
+    <div class="category-label">Ayuda | <span class="english">Help</span></div>
+  </div>
+
+  <!-- ====== SECTION B: TTS - LEARN TO INTRODUCE YOURSELF ====== -->
+  <div class="card presentations-card">
+    <button class="audio-button" onclick="speakText('Aprende a presentarte en español')">🔊</button>
+    <div class="emoji">🗣️</div>
+    <div class="main-text">APRENDE A PRESENTARTE</div>
+    <div class="english-text">TTS mini-drills for introductions (es-MX voices)</div>
+    <div class="examples-container">
+      <div class="example-item">Hola, buenos días</div>
+      <div class="example-item">Mucho gusto</div>
+      <div class="example-item">Me llamo Ana</div>
+      <div class="example-item">Soy de Estados Unidos</div>
+      <div class="example-item">Soy estudiante</div>
+    </div>
+    <div class="category-label">TTS | <span class="english">Practice</span></div>
+  </div>
+
+  <!-- TTS card: ¿Cómo te llamas? -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('¿Cómo te llamas?')">🔊</button>
+    <div class="emoji">❓</div>
+    <div class="main-text">¿CÓMO TE LLAMAS?</div>
+    <div class="english-text">What’s your name?</div>
+    <div class="response-box">
+      <div class="response-spanish">Me llamo…</div>
+      <div class="response-english">My name is…</div>
+    </div>
+    <div class="category-label">TTS | <span class="english">Intro</span></div>
+  </div>
+
+  <!-- TTS card: ¿De dónde eres? -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('¿De dónde eres?')">🔊</button>
+    <div class="emoji">🗺️</div>
+    <div class="main-text">¿DE DÓNDE ERES?</div>
+    <div class="english-text">Where are you from?</div>
+    <div class="response-box">
+      <div class="response-spanish">Soy de…</div>
+      <div class="response-english">I am from…</div>
+    </div>
+    <div class="category-label">TTS | <span class="english">Origin</span></div>
+  </div>
+
+  <!-- TTS card: Profesión simple -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Soy estudiante')">🔊</button>
+    <div class="emoji">📚</div>
+    <div class="main-text">SOY…</div>
+    <div class="english-text">I am…</div>
+    <div class="examples-container">
+      <div class="example-item">Soy estudiante</div>
+      <div class="example-item">Soy profesor / profesora</div>
+      <div class="example-item">Soy doctor / doctora</div>
+    </div>
+    <div class="category-label">TTS | <span class="english">Profession</span></div>
+  </div>
+  <!-- ====== SECTION C: YOUR ORIGINAL INTRODUCTIONS CARDS ====== -->
+
+  <!-- Main Introduction Card -->
+  <div class="card intro-card">
+    <button class="audio-button" onclick="speakText('Presentaciones en español')">🔊</button>
+    <div class="emoji">🤝🏽</div>
+    <div class="main-text">PRESENTACIONES</div>
+    <div class="english-text">Essential Spanish phrases for introductions, greetings, and meeting new people</div>
+    <div class="examples-container">
+      <div class="example-item">Frases con el verbo SER</div>
+      <div class="example-item">Saludos y despedidas</div>
+    </div>
+    <div class="category-label">Introducción | <span class="english">Introduction</span></div>
+  </div>
+
+  <!-- Category 1: Presentations with SER -->
+  <div class="card presentations-card">
+    <button class="audio-button" onclick="speakText('Presentaciones con el verbo ser')">🔊</button>
+    <div class="emoji">👋🏽</div>
+    <div class="main-text">PRESENTACIONES</div>
+    <div class="english-text">Using the verb "ser" to introduce yourself and others</div>
+    <div class="examples-container">
+      <div class="example-item">¿Cómo te llamas?</div>
+      <div class="example-item">¿De dónde eres?</div>
+    </div>
+    <div class="category-label">Verbo SER | <span class="english">Verb TO BE</span></div>
+  </div>
+
+  <!-- Category 2: Greetings -->
+  <div class="card greetings-card">
+    <button class="audio-button" onclick="speakText('Saludos y despedidas')">🔊</button>
+    <div class="emoji">😊</div>
+    <div class="main-text">SALUDOS</div>
+    <div class="english-text">Essential greetings and farewells for daily interactions</div>
+    <div class="examples-container">
+      <div class="example-item">Hola, ¿qué tal?</div>
+      <div class="example-item">Mucho gusto</div>
+    </div>
+    <div class="category-label">Saludos | <span class="english">Greetings</span></div>
+  </div>
+
+  <!-- Category 3: Community -->
+  <div class="card community-card">
+    <button class="audio-button" onclick="speakText('Comunidad y amigos')">🔊</button>
+    <div class="emoji">👥</div>
+    <div class="main-text">COMUNIDAD</div>
+    <div class="english-text">Talking about friends, neighbors, and people in your community</div>
+    <div class="examples-container">
+      <div class="example-item">Este es mi compañero</div>
+      <div class="example-item">Somos amigos</div>
+    </div>
+    <div class="category-label">Comunidad | <span class="english">Community</span></div>
+  </div>
+
+  <!-- ¿Cómo te llamas? -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('¿Cómo te llamas?')">🔊</button>
+    <div class="emoji">❓</div>
+    <div class="main-text">¿CÓMO TE LLAMAS?</div>
+    <div class="english-text">What's your name?</div>
+    <div class="response-box">
+      <div class="response-spanish">Me llamo...</div>
+      <div class="response-english">My name is...</div>
+    </div>
+    <div class="category-label">Pregunta | <span class="english">Question</span></div>
+  </div>
+
+  <!-- Me llamo -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Me llamo María')">🔊</button>
+    <div class="emoji">👤</div>
+    <div class="main-text">ME LLAMO...</div>
+    <div class="english-text">My name is...</div>
+    <div class="examples-container">
+      <div class="example-item">Me llamo María</div>
+      <div class="example-item">Me llamo Carlos</div>
+    </div>
+    <div class="category-label">Respuesta | <span class="english">Response</span></div>
+  </div>
+
+  <!-- ¿Quién es él/ella? -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('¿Quién es él?')">🔊</button>
+    <div class="emoji">👫🏽</div>
+    <div class="main-text">¿QUIÉN ES ÉL/ELLA?</div>
+    <div class="english-text">Who is he/she?</div>
+    <div class="response-box">
+      <div class="response-spanish">Es mi amigo/amiga</div>
+      <div class="response-english">He/She is my friend</div>
+    </div>
+    <div class="category-label">Pregunta | <span class="english">Question</span></div>
+  </div>
+
+  <!-- Es mi amigo/amiga -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Es mi amigo')">🔊</button>
+    <div class="emoji">👬🏽</div>
+    <div class="main-text">ES MI AMIGO/AMIGA</div>
+    <div class="english-text">He/She is my friend</div>
+    <div class="examples-container">
+      <div class="example-item">Es mi amigo Juan</div>
+      <div class="example-item">Es mi amiga Ana</div>
+    </div>
+    <div class="category-label">Presentación | <span class="english">Introduction</span></div>
+  </div>
+
+  <!-- Soy estudiante -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Soy estudiante')">🔊</button>
+    <div class="emoji">📚</div>
+    <div class="main-text">SOY ESTUDIANTE</div>
+    <div class="english-text">I am a student</div>
+    <div class="examples-container">
+      <div class="example-item">Soy profesor/profesora</div>
+      <div class="example-item">Soy doctor/doctora</div>
+    </div>
+    <div class="category-label">Profesión | <span class="english">Profession</span></div>
+  </div>
+
+  <!-- Soy de México -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Soy de México')">🔊</button>
+    <div class="emoji">🌎</div>
+    <div class="main-text">SOY DE MÉXICO</div>
+    <div class="english-text">I am from Mexico</div>
+    <div class="examples-container">
+      <div class="example-item">Soy de Estados Unidos</div>
+      <div class="example-item">Soy de España</div>
+    </div>
+    <div class="category-label">Origen | <span class="english">Origin</span></div>
+  </div>
+
+  <!-- ¿De dónde eres? -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('¿De dónde eres?')">🔊</button>
+    <div class="emoji">🗺️</div>
+    <div class="main-text">¿DE DÓNDE ERES?</div>
+    <div class="english-text">Where are you from?</div>
+    <div class="response-box">
+      <div class="response-spanish">Soy de...</div>
+      <div class="response-english">I am from...</div>
+    </div>
+    <div class="category-label">Pregunta | <span class="english">Question</span></div>
+  </div>
+
+  <!-- Hola, ¿qué tal? -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Hola, ¿qué tal?')">🔊</button>
+    <div class="emoji">👋🏽</div>
+    <div class="main-text">HOLA, ¿QUÉ TAL?</div>
+    <div class="english-text">Hi, how's it going?</div>
+    <div class="response-box">
+      <div class="response-spanish">Bien, ¿y tú?</div>
+      <div class="response-english">Good, and you?</div>
+    </div>
+    <div class="category-label">Saludo | <span class="english">Greeting</span></div>
+  </div>
+
+  <!-- Buenas tardes -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Buenas tardes')">🔊</button>
+    <div class="emoji">🌅</div>
+    <div class="main-text">BUENAS TARDES</div>
+    <div class="english-text">Good afternoon</div>
+    <div class="examples-container">
+      <div class="example-item">Buenos días</div>
+      <div class="example-item">Buenas noches</div>
+    </div>
+    <div class="category-label">Saludo formal | <span class="english">Formal greeting</span></div>
+  </div>
+
+  <!-- Mucho gusto -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Mucho gusto')">🔊</button>
+    <div class="emoji">🤝🏽</div>
+    <div class="main-text">MUCHO GUSTO</div>
+    <div class="english-text">Nice to meet you</div>
+    <div class="response-box">
+      <div class="response-spanish">Igualmente</div>
+      <div class="response-english">Likewise</div>
+    </div>
+    <div class="category-label">Presentación | <span class="english">Introduction</span></div>
+  </div>
+
+  <!-- Igualmente -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Igualmente')">🔊</button>
+    <div class="emoji">🔄</div>
+    <div class="main-text">IGUALMENTE</div>
+    <div class="english-text">Likewise</div>
+    <div class="examples-container">
+      <div class="example-item">El gusto es mío</div>
+      <div class="example-item">Encantado/Encantada</div>
+    </div>
+    <div class="category-label">Respuesta | <span class="english">Response</span></div>
+  </div>
+
+  <!-- ¿Cómo estás? -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('¿Cómo estás?')">🔊</button>
+    <div class="emoji">😊</div>
+    <div class="main-text">¿CÓMO ESTÁS?</div>
+    <div class="english-text">How are you?</div>
+    <div class="response-box">
+      <div class="response-spanish">Estoy bien, gracias</div>
+      <div class="response-english">I'm fine, thank you</div>
+    </div>
+    <div class="category-label">Pregunta | <span class="english">Question</span></div>
+  </div>
+
+  <!-- Estoy bien, gracias -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Estoy bien, gracias')">🔊</button>
+    <div class="emoji">👍🏽</div>
+    <div class="main-text">ESTOY BIEN, GRACIAS</div>
+    <div class="english-text">I'm fine, thank you</div>
+    <div class="examples-container">
+      <div class="example-item">Estoy muy bien</div>
+      <div class="example-item">Estoy excelente</div>
+    </div>
+    <div class="category-label">Respuesta | <span class="english">Response</span></div>
+  </div>
+
+  <!-- Adiós -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Adiós')">🔊</button>
+    <div class="emoji">👋🏽</div>
+    <div class="main-text">ADIÓS</div>
+    <div class="english-text">Goodbye</div>
+    <div class="examples-container">
+      <div class="example-item">Hasta luego</div>
+      <div class="example-item">Hasta mañana</div>
+    </div>
+    <div class="category-label">Despedida | <span class="english">Farewell</span></div>
+  </div>
+
+  <!-- Nos vemos -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Nos vemos')">🔊</button>
+    <div class="emoji">👀</div>
+    <div class="main-text">NOS VEMOS</div>
+    <div class="english-text">See you later</div>
+    <div class="examples-container">
+      <div class="example-item">Nos vemos pronto</div>
+      <div class="example-item">Nos vemos mañana</div>
+    </div>
+    <div class="category-label">Despedida | <span class="english">Farewell</span></div>
+  </div>
+
+  <!-- Este es mi compañero -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Este es mi compañero')">🔊</button>
+    <div class="emoji">👨🏽‍🎓</div>
+    <div class="main-text">ESTE ES MI COMPAÑERO</div>
+    <div class="english-text">This is my classmate</div>
+    <div class="examples-container">
+      <div class="example-item">Esta es mi compañera</div>
+      <div class="example-item">Son mis compañeros</div>
+    </div>
+    <div class="category-label">Presentación | <span class="english">Introduction</span></div>
+  </div>
+
+  <!-- Ella es mi vecina -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Ella es mi vecina')">🔊</button>
+    <div class="emoji">🏠</div>
+    <div class="main-text">ELLA ES MI VECINA</div>
+    <div class="english-text">She is my neighbor</div>
+    <div class="examples-container">
+      <div class="example-item">Él es mi vecino</div>
+      <div class="example-item">Son mis vecinos</div>
+    </div>
+    <div class="category-label">Vecindario | <span class="english">Neighborhood</span></div>
+  </div>
+
+  <!-- Somos amigos -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Somos amigos')">🔊</button>
+    <div class="emoji">👫🏽</div>
+    <div class="main-text">SOMOS AMIGOS</div>
+    <div class="english-text">We are friends</div>
+    <div class="examples-container">
+      <div class="example-item">Somos buenos amigos</div>
+      <div class="example-item">Somos amigas</div>
+    </div>
+    <div class="category-label">Amistad | <span class="english">Friendship</span></div>
+  </div>
+
+  <!-- Él es mi roomie -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Él es mi roomie')">🔊</button>
+    <div class="emoji">🏡</div>
+    <div class="main-text">ÉL ES MI ROOMIE</div>
+    <div class="english-text">He is my roommate</div>
+    <div class="examples-container">
+      <div class="example-item">Ella es mi roomie</div>
+      <div class="example-item">Compañero de cuarto</div>
+    </div>
+    <div class="category-label">Vivienda | <span class="english">Housing</span></div>
+  </div>
+
+  <!-- Vivimos cerca -->
+  <div class="card phrase-card">
+    <button class="audio-button" onclick="speakText('Vivimos cerca')">🔊</button>
+    <div class="emoji">📍</div>
+    <div class="main-text">VIVIMOS CERCA</div>
+    <div class="english-text">We live close by</div>
+    <div class="examples-container">
+      <div class="example-item">Vivo cerca de la escuela</div>
+      <div class="example-item">Mismo barrio</div>
+    </div>
+    <div class="category-label">Ubicación | <span class="english">Location</span></div>
+  </div>
+
+  <!-- ====== JS: TTS with es-MX preference ====== -->
+  <script>
+    function speakText(text){
+      if(!('speechSynthesis' in window)){
+        alert('Tu navegador no soporta síntesis de voz. Prueba con Chrome, Firefox o Safari.');
+        return;
+      }
+      if(speechSynthesis.speaking){
+        speechSynthesis.cancel();
+        setTimeout(()=>startSpeaking(text),100);
+      } else {
+        startSpeaking(text);
+      }
+    }
+    function startSpeaking(text){
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'es-MX';
+
+      const voices = speechSynthesis.getVoices();
+      const mexicanVoice = voices.find(v =>
+        v.lang.includes('es-MX') ||
+        v.lang.includes('es-US') ||
+        v.lang.includes('es-AR') ||
+        v.lang.includes('es-CO') ||
+        (v.lang.includes('es') && !v.lang.includes('es-ES'))
+      );
+      if(mexicanVoice){ utterance.voice = mexicanVoice; }
+
+      utterance.rate = 0.8; utterance.pitch = 1; utterance.volume = 1;
+
+      const button = event.target;
+      button.classList.add('playing'); button.innerHTML = '⏸️';
+
+      utterance.onend = function(){
+        button.classList.remove('playing'); button.innerHTML = '🔊';
+      };
+      utterance.onerror = function(){
+        button.classList.remove('playing'); button.innerHTML = '🔊';
+        alert('Error al reproducir audio. Verifica que tu navegador permita audio.');
+      };
+      try { speechSynthesis.speak(utterance); }
+      catch (e){
+        button.classList.remove('playing'); button.innerHTML = '🔊';
+        alert('Error al iniciar la síntesis de voz.');
+      }
+    }
+    speechSynthesis.onvoiceschanged = function(){ /* preload voices */ };
+    window.addEventListener('beforeunload', function(){
+      if(speechSynthesis.speaking){ speechSynthesis.cancel(); }
+    });
+    function testAudio(){ speakText('Hola'); }
+  </script>
+</body>
+</html>
