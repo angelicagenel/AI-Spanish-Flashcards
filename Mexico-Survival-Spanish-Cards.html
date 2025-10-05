@@ -651,6 +651,11 @@
     </div>
 
     <script>
+        document.body.addEventListener('click', () => {
+    if (speechSynthesis.getVoices().length === 0) {
+        speechSynthesis.getVoices();
+    }
+    });
         function speakText(text) {
             if (!('speechSynthesis' in window)) {
                 alert('Tu navegador no soporta síntesis de voz. Prueba con Chrome, Firefox o Safari.');
@@ -718,7 +723,7 @@
             }
         });
     </script>
-    <body>
+    
     <!-- DIVIDER: Dinero y Compras -->
     <div class="card divider-card">
         <div class="emoji">💰</div>
@@ -1179,7 +1184,7 @@
                 console.log('Speech error:', e);
                 button.classList.remove('playing');
                 button.innerHTML = '🔊';
-                alert('Error al reproducir audio. Verifica que tu navegador permita audio.');
+                console.log('Audio bloqueado por el navegador hasta interacción del usuario.');
             };
 
             // Speak the text
