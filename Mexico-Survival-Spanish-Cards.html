@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocket Guide: Frases de Supervivencia en México</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Montserrat', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #7ba1a5 0%, #ffe8e3 100%);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 400px;
+            min-height: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 25px 70px 25px;
+        }
+
+        @media (min-width: 600px) {
+            body {
+                padding: 40px;
+                gap: 30px;
+            }
+            .card {
+                width: 45%;
+                min-width: 350px;
+                max-width: 450px;
+                min-height: 700px;
+                padding: 60px 35px 80px 35px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .card {
+                width: 30%;
+                min-width: 380px;
+                max-width: 500px;
+                min-height: 800px;
+                padding: 70px 45px 90px 45px;
+            }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            z-index: 1;
+        }
+
+        @media (min-width: 600px) {
+            .card::before {
+                height: 140px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .card::before {
+                height: 160px;
+            }
+        }
+
+        .intro-card::before { background: linear-gradient(135deg, #ef7c8e 0%, #db6565 100%); }
+        .divider-card::before { background: linear-gradient(135deg, #7ba1a5 0%, #6b8d94 100%); }
+        .divider-card:nth-of-type(4n)::before { background: linear-gradient(135deg, #e89a8a 0%, #db6565 100%); }
+        .divider-card:nth-of-type(6n)::before { background: linear-gradient(135deg, #ef7c8e 0%, #e89a8a 100%); }
+        .phrase-card::before { background: linear-gradient(135deg, #6b8d94 0%, #7ba1a5 100%); }
+
+        .divider-card {
+            min-height: 500px;
+            border: 4px solid rgba(239, 124, 142, 0.3);
+        }
+
+        @media (min-width: 600px) {
+            .divider-card {
+                min-height: 550px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .divider-card {
+                min-height: 600px;
+            }
+        }
+
+        .emoji {
+            position: absolute !important;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3.5rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        @media (min-width: 600px) {
+            .emoji {
+                top: 105px;
+                font-size: 4.5rem;
+                height: 70px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .emoji {
+                top: 120px;
+                font-size: 5.5rem;
+                height: 80px;
+            }
+        }
+
+        .divider-card .emoji {
+            font-size: 4.5rem;
+        }
+
+        @media (min-width: 600px) {
+            .divider-card .emoji {
+                font-size: 5.5rem;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .divider-card .emoji {
+                font-size: 6.5rem;
+            }
+        }
+
+        .main-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #373f45;
+            margin: 40px 0 15px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            z-index: 2;
+            position: relative;
+            line-height: 1.1;
+            word-wrap: break-word;
+            padding: 0 15px;
+        }
+
+        @media (min-width: 600px) {
+            .main-text {
+                font-size: 1.8rem;
+                margin: 50px 0 20px 0;
+                padding: 0 20px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .main-text {
+                font-size: 2.2rem;
+                margin: 60px 0 25px 0;
+                padding: 0 25px;
+            }
+        }
+
+        .divider-card .main-text {
+            font-size: 1.8rem;
+        }
+
+        @media (min-width: 600px) {
+            .divider-card .main-text {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .divider-card .main-text {
+                font-size: 2.6rem;
+            }
+        }
+
+        .english-text {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            font-weight: 500;
+            z-index: 2;
+            position: relative;
+            margin-top: 10px;
+            line-height: 1.3;
+            padding: 0 10px;
+        }
+
+        @media (min-width: 600px) {
+            .english-text {
+                font-size: 1.1rem;
+                margin-top: 15px;
+                padding: 0 15px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .english-text {
+                font-size: 1.25rem;
+                margin-top: 20px;
+                padding: 0 20px;
+            }
+        }
+
+        .examples-container {
+            z-index: 2;
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .example-item {
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 8px 0;
+            border-left: 4px solid #ef7c8e;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #373f45;
+            line-height: 1.4;
+        }
+
+        .example-item .translation {
+            color: #bbb;
+            font-weight: 500;
+            font-size: 0.85em;
+            display: block;
+            margin-top: 3px;
+        }
+
+        @media (min-width: 600px) {
+            .example-item {
+                font-size: 1.05rem;
+                padding: 15px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .example-item {
+                font-size: 1.15rem;
+                padding: 18px;
+            }
+        }
+
+        .category-label {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.9);
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: #373f45;
+            font-weight: 600;
+            z-index: 2;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .category-label .english {
+            color: #999;
+            font-weight: 500;
+        }
+
+        @media (min-width: 600px) {
+            .category-label {
+                bottom: 25px;
+                padding: 8px 18px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .category-label {
+                bottom: 30px;
+                padding: 10px 22px;
+                font-size: 0.95rem;
+            }
+        }
+
+        .audio-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 3;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .audio-button:hover {
+            background: rgba(255,255,255,1);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .audio-button:active {
+            transform: scale(0.95);
+        }
+
+        .audio-button.playing {
+            background: #ef7c8e;
+            color: white;
+        }
+
+        @media (min-width: 600px) {
+            .audio-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+                top: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .audio-button {
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+                top: 25px;
+                right: 25px;
+            }
+        }
+
+        .survival-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(239, 124, 142, 0.9);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            z-index: 3;
+        }
+
+        @media (min-width: 600px) {
+            .survival-badge {
+                top: 20px;
+                left: 20px;
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .survival-badge {
+                top: 25px;
+                left: 25px;
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Intro Card -->
+    <div class="card intro-card">
+        <div class="survival-badge">🆘 SURVIVAL KIT</div>
+        <button class="audio-button" onclick="speakText('Guía de supervivencia para México')">🔊</button>
+        <div class="emoji">🇲🇽</div>
+        <div class="main-text">POCKET GUIDE</div>
+        <div class="english-text">Your essential survival kit for traveling in Mexico</div>
+        <div class="examples-container">
+            <div class="example-item">Frases de emergencia</div>
+            <div class="example-item">Comunicación básica</div>
+        </div>
+        <div class="category-label">Kit de Supervivencia | <span class="english">Survival Kit</span></div>
+    </div>
+
+    <!-- SECTION: CORTESÍA -->
+    <div class="card divider-card">
+        <div class="emoji">👋🏽</div>
+        <div class="main-text">CORTESÍA</div>
+        <div class="english-text">Essential polite expressions for respectful communication</div>
+        <div class="category-label">Courtesy | <span class="english">Cortesía</span></div>
+    </div>
+
+    <!-- Hola, buenos días -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Hola, buenos días')">🔊</button>
+        <div class="emoji">☀️</div>
+        <div class="main-text">HOLA, BUENOS DÍAS</div>
+        <div class="english-text">Hello, good morning</div>
+        <div class="examples-container">
+            <div class="example-item">Buenas tardes <span class="translation">Good afternoon</span></div>
+            <div class="example-item">Buenas noches <span class="translation">Good evening/night</span></div>
+        </div>
+        <div class="category-label">Saludo | <span class="english">Greeting</span></div>
+    </div>
+
+    <!-- Muchas gracias -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Muchas gracias')">🔊</button>
+        <div class="emoji">🙏🏽</div>
+        <div class="main-text">MUCHAS GRACIAS</div>
+        <div class="english-text">Thank you very much</div>
+        <div class="examples-container">
+            <div class="example-item">De nada <span class="translation">You're welcome</span></div>
+            <div class="example-item">Con mucho gusto <span class="translation">With pleasure</span></div>
+        </div>
+        <div class="category-label">Agradecimiento | <span class="english">Thanks</span></div>
+    </div>
+
+    <!-- Por favor -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Por favor')">🔊</button>
+        <div class="emoji">🤝🏽</div>
+        <div class="main-text">POR FAVOR</div>
+        <div class="english-text">Please</div>
+        <div class="examples-container">
+            <div class="example-item">¿Puede ayudarme, por favor? <span class="translation">Can you help me, please?</span></div>
+        </div>
+        <div class="category-label">Cortesía | <span class="english">Courtesy</span></div>
+    </div>
+
+    <!-- Disculpe -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Disculpe')">🔊</button>
+        <div class="emoji">🙇🏽</div>
+        <div class="main-text">DISCULPE</div>
+        <div class="english-text">Excuse me</div>
+        <div class="examples-container">
+            <div class="example-item">Disculpe, señor <span class="translation">Excuse me, sir</span></div>
+            <div class="example-item">Disculpe, señora <span class="translation">Excuse me, ma'am</span></div>
+        </div>
+        <div class="category-label">Disculpa | <span class="english">Excuse me</span></div>
+    </div>
+
+    <!-- Con permiso -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Con permiso')">🔊</button>
+        <div class="emoji">🚶🏽</div>
+        <div class="main-text">CON PERMISO</div>
+        <div class="english-text">Excuse me (to pass by)</div>
+        <div class="examples-container">
+            <div class="example-item">Con permiso, por favor <span class="translation">Excuse me, please (to pass)</span></div>
+        </div>
+        <div class="category-label">Paso | <span class="english">Passing</span></div>
+    </div>
+
+    <!-- Hasta luego -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Hasta luego')">🔊</button>
+        <div class="emoji">👋🏽</div>
+        <div class="main-text">HASTA LUEGO</div>
+        <div class="english-text">See you later</div>
+        <div class="examples-container">
+            <div class="example-item">Hasta mañana <span class="translation">See you tomorrow</span></div>
+            <div class="example-item">Adiós <span class="translation">Goodbye</span></div>
+        </div>
+        <div class="category-label">Despedida | <span class="english">Farewell</span></div>
+    </div>
+
+    <!-- SECTION: TRANSPORTE -->
+    <div class="card divider-card">
+        <div class="emoji">🚕</div>
+        <div class="main-text">TRANSPORTE</div>
+        <div class="english-text">Getting around the city and asking for directions</div>
+        <div class="category-label">Transportation | <span class="english">Transporte</span></div>
+    </div>
+
+    <!-- ¿Dónde está? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿Dónde está?')">🔊</button>
+        <div class="emoji">🗺️</div>
+        <div class="main-text">¿DÓNDE ESTÁ?</div>
+        <div class="english-text">Where is...?</div>
+        <div class="examples-container">
+            <div class="example-item">¿Dónde está el baño? <span class="translation">Where is the bathroom?</span></div>
+            <div class="example-item">¿Dónde está la farmacia? <span class="translation">Where is the pharmacy?</span></div>
+        </div>
+        <div class="category-label">Ubicación | <span class="english">Location</span></div>
+    </div>
+
+    <!-- Voy al hotel -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Voy al hotel')">🔊</button>
+        <div class="emoji">🏨</div>
+        <div class="main-text">VOY AL HOTEL</div>
+        <div class="english-text">I'm going to the hotel</div>
+        <div class="examples-container">
+            <div class="example-item">¿Dónde está mi hotel? <span class="translation">Where is my hotel?</span></div>
+        </div>
+        <div class="category-label">Alojamiento | <span class="english">Accommodation</span></div>
+    </div>
+
+    <!-- Al aeropuerto -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Al aeropuerto, por favor')">🔊</button>
+        <div class="emoji">✈️</div>
+        <div class="main-text">AL AEROPUERTO</div>
+        <div class="english-text">To the airport, please</div>
+        <div class="examples-container">
+            <div class="example-item">¿Cuánto cuesta al aeropuerto? <span class="translation">How much to the airport?</span></div>
+        </div>
+        <div class="category-label">Transporte | <span class="english">Transportation</span></div>
+    </div>
+
+    <!-- Necesito un taxi o Uber -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Necesito un taxi o Uber')">🔊</button>
+        <div class="emoji">🚖</div>
+        <div class="main-text">NECESITO UN TAXI O UBER</div>
+        <div class="english-text">I need a taxi or Uber</div>
+        <div class="examples-container">
+            <div class="example-item">¿Dónde puedo tomar un taxi? <span class="translation">Where can I get a taxi?</span></div>
+        </div>
+        <div class="category-label">Taxi | <span class="english">Taxi</span></div>
+    </div>
+
+    <!-- Bajo aquí -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Bajo aquí, por favor')">🔊</button>
+        <div class="emoji">🛑</div>
+        <div class="main-text">BAJO AQUÍ</div>
+        <div class="english-text">I'm getting off here, please</div>
+        <div class="examples-container">
+            <div class="example-item">Aquí está bien <span class="translation">Here is fine</span></div>
+        </div>
+        <div class="category-label">Indicación | <span class="english">Direction</span></div>
+    </div>
+
+    <!-- SECTION: COMIDA -->
+    <div class="card divider-card">
+        <div class="emoji">🍽️</div>
+        <div class="main-text">COMIDA</div>
+        <div class="english-text">Ordering food and dining at restaurants</div>
+        <div class="category-label">Food | <span class="english">Comida</span></div>
+    </div>
+
+    <!-- Una mesa para dos -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Una mesa para dos')">🔊</button>
+        <div class="emoji">🪑</div>
+        <div class="main-text">UNA MESA PARA DOS</div>
+        <div class="english-text">A table for two</div>
+        <div class="examples-container">
+            <div class="example-item">Una mesa para cuatro <span class="translation">A table for four</span></div>
+        </div>
+        <div class="category-label">Restaurante | <span class="english">Restaurant</span></div>
+    </div>
+
+    <!-- Quiero este platillo -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Quiero este platillo')">🔊</button>
+        <div class="emoji">🍴</div>
+        <div class="main-text">QUIERO ESTE PLATILLO</div>
+        <div class="english-text">I want this dish</div>
+        <div class="examples-container">
+            <div class="example-item">¿Qué recomienda? <span class="translation">What do you recommend?</span></div>
+        </div>
+        <div class="category-label">Orden | <span class="english">Order</span></div>
+    </div>
+
+    <!-- Sin picante -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Sin picante')">🔊</button>
+        <div class="emoji">🌶️</div>
+        <div class="main-text">SIN PICANTE</div>
+        <div class="english-text">Not spicy</div>
+        <div class="examples-container">
+            <div class="example-item">Poco picante <span class="translation">A little spicy</span></div>
+        </div>
+        <div class="category-label">Preferencia | <span class="english">Preference</span></div>
+    </div>
+
+    <!-- Una botella de agua -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Una botella de agua')">🔊</button>
+        <div class="emoji">💧</div>
+        <div class="main-text">UNA BOTELLA DE AGUA</div>
+        <div class="english-text">A bottle of water</div>
+        <div class="examples-container">
+            <div class="example-item">Agua natural, por favor <span class="translation">Still water, please</span></div>
+        </div>
+        <div class="category-label">Bebida | <span class="english">Drink</span></div>
+    </div>
+
+    <!-- La cuenta -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('La cuenta, por favor')">🔊</button>
+        <div class="emoji">🧾</div>
+        <div class="main-text">LA CUENTA, POR FAVOR</div>
+        <div class="english-text">The check, please</div>
+        <div class="examples-container">
+            <div class="example-item">¿Cuánto es? <span class="translation">How much is it?</span></div>
+        </div>
+        <div class="category-label">Pago | <span class="english">Payment</span></div>
+    </div>
+
+    <!-- Soy alérgico -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Soy alérgico')">🔊</button>
+        <div class="emoji">🚫</div>
+        <div class="main-text">SOY ALÉRGICO/A</div>
+        <div class="english-text">I'm allergic</div>
+        <div class="examples-container">
+            <div class="example-item">Soy alérgico a los mariscos <span class="translation">I'm allergic to seafood</span></div>
+            <div class="example-item">Soy alérgico a los cacahuates <span class="translation">I'm allergic to peanuts</span></div>
+        </div>
+        <div class="category-label">Alergia | <span class="english">Allergy</span></div>
+    </div>
+
+    <!-- ¡Provecho! -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¡Provecho!')">🔊</button>
+        <div class="emoji">😋</div>
+        <div class="main-text">¡PROVECHO!</div>
+        <div class="english-text">Enjoy your meal!</div>
+        <div class="examples-container">
+            <div class="example-item">Gracias, igualmente <span class="translation">Thanks, you too</span></div>
+        </div>
+        <div class="category-label">Comida | <span class="english">Dining</span></div>
+    </div>
+
+    <script>
+        function speakText(text) {
+            if (!('speechSynthesis' in window)) {
+                alert('Tu navegador no soporta síntesis de voz. Prueba con Chrome, Firefox o Safari.');
+                return;
+            }
+
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+                setTimeout(() => startSpeaking(text), 100);
+            } else {
+                startSpeaking(text);
+            }
+        }
+
+        function startSpeaking(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'es-MX';
+            
+            const voices = speechSynthesis.getVoices();
+            const mexicanVoice = voices.find(voice => 
+                voice.lang.includes('es-MX') || 
+                voice.lang.includes('es-US') ||
+                voice.lang.includes('es-AR') ||
+                voice.lang.includes('es-CO') ||
+                (voice.lang.includes('es') && !voice.lang.includes('es-ES'))
+            );
+            
+            if (mexicanVoice) {
+                utterance.voice = mexicanVoice;
+            }
+            
+            utterance.rate = 0.8;
+            utterance.pitch = 1;
+            utterance.volume = 1;
+
+            const button = event.target || event.currentTarget;
+            button.classList.add('playing');
+            button.innerHTML = '⏸️';
+
+            utterance.onend = function() {
+                button.classList.remove('playing');
+                button.innerHTML = '🔊';
+            };
+
+            utterance.onerror = function(e) {
+                button.classList.remove('playing');
+                button.innerHTML = '🔊';
+            };
+
+            try {
+                speechSynthesis.speak(utterance);
+            } catch (error) {
+                button.classList.remove('playing');
+                button.innerHTML = '🔊';
+            }
+        }
+
+        speechSynthesis.onvoiceschanged = function() {
+            console.log('Voices loaded:', speechSynthesis.getVoices().length);
+        };
+
+        window.addEventListener('beforeunload', function() {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocket Guide: Frases de Supervivencia en México</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Montserrat', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #7ba1a5 0%, #ffe8e3 100%);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 400px;
+            min-height: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 25px 70px 25px;
+        }
+
+        @media (min-width: 600px) {
+            body {
+                padding: 40px;
+                gap: 30px;
+            }
+            .card {
+                width: 45%;
+                min-width: 350px;
+                max-width: 450px;
+                min-height: 700px;
+                padding: 60px 35px 80px 35px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .card {
+                width: 30%;
+                min-width: 380px;
+                max-width: 500px;
+                min-height: 800px;
+                padding: 70px 45px 90px 45px;
+            }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            z-index: 1;
+        }
+
+        @media (min-width: 600px) {
+            .card::before {
+                height: 140px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .card::before {
+                height: 160px;
+            }
+        }
+
+        .intro-card::before { background: linear-gradient(135deg, #ef7c8e 0%, #db6565 100%); }
+        .divider-card::before { background: linear-gradient(135deg, #7ba1a5 0%, #6b8d94 100%); }
+        .divider-card:nth-of-type(4n)::before { background: linear-gradient(135deg, #e89a8a 0%, #db6565 100%); }
+        .divider-card:nth-of-type(6n)::before { background: linear-gradient(135deg, #ef7c8e 0%, #e89a8a 100%); }
+        .phrase-card::before { background: linear-gradient(135deg, #6b8d94 0%, #7ba1a5 100%); }
+
+        .divider-card {
+            min-height: 500px;
+            border: 4px solid rgba(239, 124, 142, 0.3);
+        }
+
+        @media (min-width: 600px) {
+            .divider-card {
+                min-height: 550px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .divider-card {
+                min-height: 600px;
+            }
+        }
+
+        .emoji {
+            position: absolute !important;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3.5rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        @media (min-width: 600px) {
+            .emoji {
+                top: 105px;
+                font-size: 4.5rem;
+                height: 70px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .emoji {
+                top: 120px;
+                font-size: 5.5rem;
+                height: 80px;
+            }
+        }
+
+        .divider-card .emoji {
+            font-size: 4.5rem;
+        }
+
+        @media (min-width: 600px) {
+            .divider-card .emoji {
+                font-size: 5.5rem;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .divider-card .emoji {
+                font-size: 6.5rem;
+            }
+        }
+
+        /* Ajuste especial para tortuga */
+        .turtle-emoji {
+            top: 70px !important;
+        }
+
+        @media (min-width: 600px) {
+            .turtle-emoji {
+                top: 85px !important;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .turtle-emoji {
+                top: 100px !important;
+            }
+        }
+
+        .main-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #373f45;
+            margin: 40px 0 15px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            z-index: 2;
+            position: relative;
+            line-height: 1.1;
+            word-wrap: break-word;
+            padding: 0 15px;
+        }
+
+        @media (min-width: 600px) {
+            .main-text {
+                font-size: 1.8rem;
+                margin: 50px 0 20px 0;
+                padding: 0 20px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .main-text {
+                font-size: 2.2rem;
+                margin: 60px 0 25px 0;
+                padding: 0 25px;
+            }
+        }
+
+        .divider-card .main-text {
+            font-size: 1.8rem;
+        }
+
+        @media (min-width: 600px) {
+            .divider-card .main-text {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .divider-card .main-text {
+                font-size: 2.6rem;
+            }
+        }
+
+        .english-text {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            font-weight: 500;
+            z-index: 2;
+            position: relative;
+            margin-top: 10px;
+            line-height: 1.3;
+            padding: 0 10px;
+        }
+
+        @media (min-width: 600px) {
+            .english-text {
+                font-size: 1.1rem;
+                margin-top: 15px;
+                padding: 0 15px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .english-text {
+                font-size: 1.25rem;
+                margin-top: 20px;
+                padding: 0 20px;
+            }
+        }
+
+        .examples-container {
+            z-index: 2;
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .example-item {
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 8px 0;
+            border-left: 4px solid #ef7c8e;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #373f45;
+            line-height: 1.4;
+        }
+
+        .example-item .translation {
+            color: #bbb;
+            font-weight: 500;
+            font-size: 0.85em;
+            display: block;
+            margin-top: 3px;
+        }
+
+        @media (min-width: 600px) {
+            .example-item {
+                font-size: 1.05rem;
+                padding: 15px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .example-item {
+                font-size: 1.15rem;
+                padding: 18px;
+            }
+        }
+
+        .category-label {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.9);
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: #373f45;
+            font-weight: 600;
+            z-index: 2;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .category-label .english {
+            color: #999;
+            font-weight: 500;
+        }
+
+        @media (min-width: 600px) {
+            .category-label {
+                bottom: 25px;
+                padding: 8px 18px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .category-label {
+                bottom: 30px;
+                padding: 10px 22px;
+                font-size: 0.95rem;
+            }
+        }
+
+        .audio-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 3;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .audio-button:hover {
+            background: rgba(255,255,255,1);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .audio-button:active {
+            transform: scale(0.95);
+        }
+
+        .audio-button.playing {
+            background: #ef7c8e;
+            color: white;
+        }
+
+        @media (min-width: 600px) {
+            .audio-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+                top: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .audio-button {
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+                top: 25px;
+                right: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- DIVIDER: Dinero y Compras -->
+    <div class="card divider-card">
+        <div class="emoji">💰</div>
+        <div class="main-text">DINERO Y COMPRAS</div>
+        <div class="english-text">Money matters and shopping essentials</div>
+        <div class="category-label">Money & Shopping</div>
+    </div>
+
+    <!-- ¿Cuánto cuesta? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿Cuánto cuesta esto?')">🔊</button>
+        <div class="emoji">💵</div>
+        <div class="main-text">¿CUÁNTO CUESTA?</div>
+        <div class="english-text">How much does it cost?</div>
+        <div class="examples-container">
+            <div class="example-item">¿Cuánto cuesta la entrada? <span class="translation">How much is the entrance fee?</span></div>
+            <div class="example-item">¿Cuánto es en total? <span class="translation">How much is it in total?</span></div>
+        </div>
+        <div class="category-label">Precio | <span class="english">Price</span></div>
+    </div>
+
+    <!-- ¿Recibe tarjeta? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿Recibe tarjeta?')">🔊</button>
+        <div class="emoji">💳</div>
+        <div class="main-text">¿RECIBE TARJETA?</div>
+        <div class="english-text">Do you accept cards?</div>
+        <div class="examples-container">
+            <div class="example-item">¿Solo efectivo? <span class="translation">Cash only?</span></div>
+            <div class="example-item">¿Puedo pagar con tarjeta? <span class="translation">Can I pay with card?</span></div>
+        </div>
+        <div class="category-label">Pago | <span class="english">Payment</span></div>
+    </div>
+
+    <!-- ¿Tiene cambio? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿Tiene cambio?')">🔊</button>
+        <div class="emoji">💸</div>
+        <div class="main-text">¿TIENE CAMBIO?</div>
+        <div class="english-text">Do you have change?</div>
+        <div class="examples-container">
+            <div class="example-item">No tengo cambio <span class="translation">I don't have change</span></div>
+        </div>
+        <div class="category-label">Efectivo | <span class="english">Cash</span></div>
+    </div>
+
+    <!-- ¿Tiene más barato? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿Tiene más barato?')">🔊</button>
+        <div class="emoji">🏷️</div>
+        <div class="main-text">¿TIENE MÁS BARATO?</div>
+        <div class="english-text">Do you have something cheaper?</div>
+        <div class="examples-container">
+            <div class="example-item">¿Tiene una talla más grande? <span class="translation">Do you have a bigger size?</span></div>
+            <div class="example-item">¿Tiene otro color? <span class="translation">Do you have another color?</span></div>
+        </div>
+        <div class="category-label">Compras | <span class="english">Shopping</span></div>
+    </div>
+
+    <!-- DIVIDER: Hotel -->
+    <div class="card divider-card">
+        <div class="emoji">🏨</div>
+        <div class="main-text">HOTEL</div>
+        <div class="english-text">Hotel check-in, services, and accommodations</div>
+        <div class="category-label">Hotel</div>
+    </div>
+
+    <!-- ¿Tiene habitaciones disponibles? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿Tiene habitaciones disponibles?')">🔊</button>
+        <div class="emoji">🛏️</div>
+        <div class="main-text">¿TIENE HABITACIONES?</div>
+        <div class="english-text">Do you have available rooms?</div>
+        <div class="examples-container">
+            <div class="example-item">Para dos noches <span class="translation">For two nights</span></div>
+            <div class="example-item">Una habitación doble <span class="translation">A double room</span></div>
+        </div>
+        <div class="category-label">Reserva | <span class="english">Booking</span></div>
+    </div>
+
+    <!-- ¿A qué hora es el check-out? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿A qué hora es el check-out?')">🔊</button>
+        <div class="emoji">🕐</div>
+        <div class="main-text" style="font-size: 1.4rem; margin-top: 50px;">¿A QUÉ HORA ES EL CHECK-OUT?</div>
+        <div class="english-text">What time is check-out?</div>
+        <div class="examples-container">
+            <div class="example-item">¿A qué hora es el check-in? <span class="translation">What time is check-in?</span></div>
+            <div class="example-item">¿Puedo salir más tarde? <span class="translation">Can I check out later?</span></div>
+        </div>
+        <div class="category-label">Horario | <span class="english">Schedule</span></div>
+    </div>
+
+    <!-- La llave de mi habitación -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('La llave de mi habitación, por favor')">🔊</button>
+        <div class="emoji">🔑</div>
+        <div class="main-text">LA LLAVE DE MI HABITACIÓN</div>
+        <div class="english-text">The key to my room</div>
+        <div class="examples-container">
+            <div class="example-item">Perdí mi llave <span class="translation">I lost my key</span></div>
+            <div class="example-item">Habitación número... <span class="translation">Room number...</span></div>
+        </div>
+        <div class="category-label">Acceso | <span class="english">Access</span></div>
+    </div>
+
+    <!-- ¿A qué hora es el desayuno? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿A qué hora es el desayuno?')">🔊</button>
+        <div class="emoji">🥐</div>
+        <div class="main-text">¿A QUÉ HORA ES EL DESAYUNO?</div>
+        <div class="english-text">What time is breakfast?</div>
+        <div class="examples-container">
+            <div class="example-item">¿Dónde es el desayuno? <span class="translation">Where is breakfast?</span></div>
+            <div class="example-item">¿Está incluido? <span class="translation">Is it included?</span></div>
+        </div>
+        <div class="category-label">Comida | <span class="english">Meal</span></div>
+    </div>
+
+    <!-- DIVIDER: Tecnología -->
+    <div class="card divider-card">
+        <div class="emoji">📱</div>
+        <div class="main-text">TECNOLOGÍA</div>
+        <div class="english-text">Staying connected during your trip</div>
+        <div class="category-label">Technology</div>
+    </div>
+
+    <!-- ¿Hay internet? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿Hay internet aquí?')">🔊</button>
+        <div class="emoji">📶</div>
+        <div class="main-text">¿HAY INTERNET?</div>
+        <div class="english-text">Is there internet?</div>
+        <div class="examples-container">
+            <div class="example-item">¿Tienen internet? <span class="translation">Do you have internet?</span></div>
+            <div class="example-item">No tengo señal <span class="translation">I have no signal</span></div>
+        </div>
+        <div class="category-label">Conexión | <span class="english">Connection</span></div>
+    </div>
+
+    <!-- ¿Cuál es la contraseña del internet? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿Cuál es la contraseña del internet?')">🔊</button>
+        <div class="emoji">🔐</div>
+        <div class="main-text" style="font-size: 1.4rem; margin-top: 50px;">¿CUÁL ES LA CONTRASEÑA DEL INTERNET?</div>
+        <div class="english-text">What's the internet password?</div>
+        <div class="examples-container">
+            <div class="example-item">¿Puede escribirla? <span class="translation">Can you write it down?</span></div>
+            <div class="example-item">No puedo conectarme <span class="translation">I can't connect</span></div>
+        </div>
+        <div class="category-label">WiFi | <span class="english">WiFi</span></div>
+    </div>
+
+    <!-- Necesito cargar mi teléfono -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Necesito cargar mi teléfono')">🔊</button>
+        <div class="emoji">🔌</div>
+        <div class="main-text">NECESITO CARGAR MI TELÉFONO</div>
+        <div class="english-text">I need to charge my phone</div>
+        <div class="examples-container">
+            <div class="example-item">¿Tiene un cargador? <span class="translation">Do you have a charger?</span></div>
+            <div class="example-item">¿Dónde hay un enchufe? <span class="translation">Where is an outlet?</span></div>
+        </div>
+        <div class="category-label">Batería | <span class="english">Battery</span></div>
+    </div>
+
+    <!-- DIVIDER: Comunicación -->
+    <div class="card divider-card">
+        <div class="emoji">💬</div>
+        <div class="main-text">COMUNICACIÓN</div>
+        <div class="english-text">Breaking language barriers and getting help</div>
+        <div class="category-label">Communication</div>
+    </div>
+
+    <!-- No hablo mucho español -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('No hablo mucho español')">🔊</button>
+        <div class="emoji">🗣️</div>
+        <div class="main-text">NO HABLO MUCHO ESPAÑOL</div>
+        <div class="english-text">I don't speak much Spanish</div>
+        <div class="examples-container">
+            <div class="example-item">Hablo inglés <span class="translation">I speak English</span></div>
+        </div>
+        <div class="category-label">Idioma | <span class="english">Language</span></div>
+    </div>
+
+    <!-- ¿Habla inglés? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿Habla inglés?')">🔊</button>
+        <div class="emoji">🌐</div>
+        <div class="main-text">¿HABLA INGLÉS?</div>
+        <div class="english-text">Do you speak English?</div>
+        <div class="examples-container">
+            <div class="example-item">¿Alguien habla inglés? <span class="translation">Does anyone speak English?</span></div>
+        </div>
+        <div class="category-label">Comunicación | <span class="english">Communication</span></div>
+    </div>
+
+    <!-- Más despacio, por favor -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Más despacio, por favor')">🔊</button>
+        <div class="emoji turtle-emoji">🐢</div>
+        <div class="main-text">MÁS DESPACIO</div>
+        <div class="english-text">Slower, please</div>
+        <div class="examples-container">
+            <div class="example-item">¿Puede repetir? <span class="translation">Can you repeat?</span></div>
+        </div>
+        <div class="category-label">Velocidad | <span class="english">Speed</span></div>
+    </div>
+
+    <!-- ¿Puede escribirlo? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿Puede escribirlo?')">🔊</button>
+        <div class="emoji">✍🏽</div>
+        <div class="main-text">¿PUEDE ESCRIBIRLO?</div>
+        <div class="english-text">Can you write it down?</div>
+        <div class="examples-container">
+            <div class="example-item">Por escrito, por favor <span class="translation">In writing, please</span></div>
+            <div class="example-item">Aquí (señalando papel) <span class="translation">Here (pointing to paper)</span></div>
+        </div>
+        <div class="category-label">Escritura | <span class="english">Writing</span></div>
+    </div>
+
+    <!-- ¿Cómo se dice...? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿Cómo se dice en español?')">🔊</button>
+        <div class="emoji">❓</div>
+        <div class="main-text">¿CÓMO SE DICE...?</div>
+        <div class="english-text">How do you say...?</div>
+        <div class="examples-container">
+            <div class="example-item">¿Qué significa esto? <span class="translation">What does this mean?</span></div>
+        </div>
+        <div class="category-label">Traducción | <span class="english">Translation</span></div>
+    </div>
+
+    <!-- DIVIDER: Emergencias -->
+    <div class="card divider-card">
+        <div class="emoji">🆘</div>
+        <div class="main-text">EMERGENCIAS</div>
+        <div class="english-text">Critical phrases for health and safety emergencies</div>
+        <div class="category-label">Emergencies</div>
+    </div>
+
+    <!-- ¿Puede ayudarme? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿Puede ayudarme, por favor?')">🔊</button>
+        <div class="emoji">🆘</div>
+        <div class="main-text">¿PUEDE AYUDARME?</div>
+        <div class="english-text">Can you help me?</div>
+        <div class="examples-container">
+            <div class="example-item">Estoy perdido/a <span class="translation">I'm lost</span></div>
+        </div>
+        <div class="category-label">Ayuda | <span class="english">Help</span></div>
+    </div>
+
+    <!-- ¡Ayuda! -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¡Ayuda, por favor!')">🔊</button>
+        <div class="emoji">🚨</div>
+        <div class="main-text">¡AYUDA!</div>
+        <div class="english-text">Help!</div>
+        <div class="examples-container">
+            <div class="example-item">¡Socorro! <span class="translation">Help!</span></div>
+            <div class="example-item">Es una emergencia <span class="translation">It's an emergency</span></div>
+        </div>
+        <div class="category-label">Emergencia | <span class="english">Emergency</span></div>
+    </div>
+
+    <!-- Necesito un médico -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Necesito un médico, por favor')">🔊</button>
+        <div class="emoji">👨🏽‍⚕️</div>
+        <div class="main-text">NECESITO UN MÉDICO</div>
+        <div class="english-text">I need a doctor</div>
+        <div class="examples-container">
+            <div class="example-item">Estoy enfermo/a <span class="translation">I'm sick</span></div>
+            <div class="example-item">Me siento mal <span class="translation">I don't feel well</span></div>
+        </div>
+        <div class="category-label">Salud | <span class="english">Health</span></div>
+    </div>
+
+    <!-- Busco una farmacia -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Busco una farmacia')">🔊</button>
+        <div class="emoji">💊</div>
+        <div class="main-text">BUSCO UNA FARMACIA</div>
+        <div class="english-text">I'm looking for a pharmacy</div>
+        <div class="examples-container">
+            <div class="example-item">¿Dónde está la farmacia? <span class="translation">Where is the pharmacy?</span></div>
+            <div class="example-item">Necesito medicina <span class="translation">I need medicine</span></div>
+        </div>
+        <div class="category-label">Farmacia | <span class="english">Pharmacy</span></div>
+    </div>
+
+    <!-- ¿Dónde está la embajada americana? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿Dónde está la embajada americana?')">🔊</button>
+        <div class="emoji">🏛️</div>
+        <div class="main-text" style="font-size: 1.3rem; margin-top: 60px;">¿DÓNDE ESTÁ LA EMBAJADA AMERICANA?</div>
+        <div class="english-text">Where is the American embassy?</div>
+        <div class="examples-container">
+            <div class="example-item">Embajada canadiense <span class="translation">Canadian embassy</span></div>
+            <div class="example-item">Necesito hablar con mi consulado <span class="translation">I need to talk to my consulate</span></div>
+        </div>
+        <div class="category-label">Consulado | <span class="english">Consulate</span></div>
+    </div>
+
+    <!-- DIVIDER: Turismo -->
+    <div class="card divider-card">
+        <div class="emoji">🏖️</div>
+        <div class="main-text">TURISMO</div>
+        <div class="english-text">Exploring attractions and booking activities</div>
+        <div class="category-label">Tourism</div>
+    </div>
+
+    <!-- Quiero ir a la playa -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('Quiero ir a la playa')">🔊</button>
+        <div class="emoji">🏖️</div>
+        <div class="main-text">QUIERO IR A LA PLAYA</div>
+        <div class="english-text">I want to go to the beach</div>
+        <div class="examples-container">
+            <div class="example-item">¿Cómo llego a la playa? <span class="translation">How do I get to the beach?</span></div>
+            <div class="example-item">¿Hay transporte? <span class="translation">Is there transportation?</span></div>
+        </div>
+        <div class="category-label">Destino | <span class="english">Destination</span></div>
+    </div>
+
+    <!-- ¿Hay una excursión a las pirámides? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿Hay una excursión a las pirámides?')">🔊</button>
+        <div class="emoji">🗿</div>
+        <div class="main-text">¿HAY EXCURSIÓN A LAS PIRÁMIDES?</div>
+        <div class="english-text">Is there a tour to the pyramids?</div>
+        <div class="examples-container">
+            <div class="example-item">¿Cuánto dura? <span class="translation">How long does it last?</span></div>
+        </div>
+        <div class="category-label">Tours | <span class="english">Tours</span></div>
+    </div>
+
+    <!-- ¿Dónde puedo comprar boletos? -->
+    <div class="card phrase-card">
+        <button class="audio-button" onclick="speakText('¿Dónde puedo comprar boletos?')">🔊</button>
+        <div class="emoji">🎫</div>
+        <div class="main-text" style="font-size: 1.4rem; margin-top: 50px;">¿DÓNDE PUEDO COMPRAR BOLETOS?</div>
+        <div class="english-text">Where can I buy tickets?</div>
+        <div class="examples-container">
+            <div class="example-item">¿Cuánto cuesta la entrada? <span class="translation">How much is the entrance fee?</span></div>
+            <div class="example-item">Dos boletos, por favor <span class="translation">Two tickets, please</span></div>
+        </div>
+        <div class="category-label">Entradas | <span class="english">Tickets</span></div>
+    </div>
+
+    <!-- SURVIVAL TIPS Card 1 -->
+    <div class="card intro-card">
+        <div class="emoji">📱</div>
+        <div class="main-text" style="font-size: 1.3rem; margin-top: 75px;">TIPS</div>
+        <div class="english-text">Save important info on your phone</div>
+        <div class="examples-container">
+            <div class="example-item">Save hotel address in Spanish on your phone <span class="translation">Guarda dirección del hotel en español</span></div>
+            <div class="example-item">Have embassy phone number in contacts <span class="translation">Ten número de embajada en contactos</span></div>
+        </div>
+        <div class="category-label">Preparación | <span class="english">Preparation</span></div>
+    </div>
+
+    <!-- SURVIVAL TIPS Card 2 -->
+    <div class="card intro-card">
+        <div class="emoji">🚖</div>
+        <div class="main-text" style="font-size: 1.3rem; margin-top: 60px;">TIPS</div>
+        <div class="english-text">Safe transportation options</div>
+        <div class="examples-container">
+            <div class="example-item">Use Uber or "taxis de sitio" (registered stands) <span class="translation">Usa Uber o taxis de sitio</span></div>
+            <div class="example-item">Keep printed copy of key info <span class="translation">Ten copia impresa de info clave</span></div>
+        </div>
+        <div class="category-label">Transporte | <span class="english">Transportation</span></div>
+    </div>
+
+    <!-- SURVIVAL TIPS Card 3 -->
+    <div class="card intro-card">
+        <div class="emoji">💰</div>
+        <div class="main-text" style="font-size: 1.3rem; margin-top: 70px;">TIPS</div>
+        <div class="english-text">Smart money practices</div>
+        <div class="examples-container">
+            <div class="example-item">Carry bills of 20, 50, and 100 pesos <span class="translation">Lleva billetes de 20, 50 y 100 pesos</span></div>
+            <div class="example-item">Keep emergency cash in separate locations <span class="translation">Guarda efectivo en lugares separados</span></div>
+        </div>
+        <div class="category-label">Dinero | <span class="english">Money</span></div>
+    </div>
+
+    <!-- SURVIVAL TIPS Card 4 -->
+    <div class="card intro-card">
+        <div class="emoji">🆘</div>
+        <div class="main-text" style="font-size: 1.3rem; margin-top: 60px;">TIPS</div>
+        <div class="english-text">Emergency contacts</div>
+        <div class="examples-container">
+            <div class="example-item">911 (general emergencies) <span class="translation">911 (emergencias generales)</span></div>
+            <div class="example-item">Use OXXO stores for ATMs and basics <span class="translation">Usa tiendas OXXO para cajeros</span></div>
+        </div>
+        <div class="category-label">Emergencias | <span class="english">Emergencies</span></div>
+    </div>
+
+    <script>
+        // Text-to-Speech functionality
+        function speakText(text) {
+            // Check if speech synthesis is supported
+            if (!('speechSynthesis' in window)) {
+                alert('Tu navegador no soporta síntesis de voz. Prueba con Chrome, Firefox o Safari.');
+                return;
+            }
+
+            // Cancel any ongoing speech
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+                setTimeout(() => startSpeaking(text), 100);
+            } else {
+                startSpeaking(text);
+            }
+        }
+
+        function startSpeaking(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            
+            // Set language to Mexican Spanish
+            utterance.lang = 'es-MX';
+            
+            // Try to find Mexican/Latin American Spanish voices
+            const voices = speechSynthesis.getVoices();
+            const mexicanVoice = voices.find(voice => 
+                voice.lang.includes('es-MX') || 
+                voice.lang.includes('es-US') ||
+                voice.lang.includes('es-AR') ||
+                voice.lang.includes('es-CO') ||
+                (voice.lang.includes('es') && !voice.lang.includes('es-ES'))
+            );
+            
+            if (mexicanVoice) {
+                utterance.voice = mexicanVoice;
+                console.log('Using voice:', mexicanVoice.name, mexicanVoice.lang);
+            }
+            
+            // Set speech rate for better learning
+            utterance.rate = 0.8;
+            utterance.pitch = 1;
+            utterance.volume = 1;
+
+            // Find button and add visual feedback
+            const button = event.target || event.currentTarget;
+            button.classList.add('playing');
+            button.innerHTML = '⏸️';
+
+            // Reset button when speech ends
+            utterance.onend = function() {
+                button.classList.remove('playing');
+                button.innerHTML = '🔊';
+            };
+
+            utterance.onerror = function(e) {
+                console.log('Speech error:', e);
+                button.classList.remove('playing');
+                button.innerHTML = '🔊';
+                alert('Error al reproducir audio. Verifica que tu navegador permita audio.');
+            };
+
+            // Speak the text
+            try {
+                speechSynthesis.speak(utterance);
+            } catch (error) {
+                console.log('Speech synthesis error:', error);
+                button.classList.remove('playing');
+                button.innerHTML = '🔊';
+                alert('Error al iniciar la síntesis de voz.');
+            }
+        }
+
+        // Load voices when they become available
+        speechSynthesis.onvoiceschanged = function() {
+            console.log('Voices loaded:', speechSynthesis.getVoices().length);
+        };
+
+        // Stop speech if user navigates away
+        window.addEventListener('beforeunload', function() {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+        });
+    </script>
+</body>
+</html>
